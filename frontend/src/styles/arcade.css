@@ -1,0 +1,114 @@
+.arcade-page { padding-block: 44px; max-width: 1110px; }
+.arcade-intro { text-align: center; }
+.arcade-intro h1 { font-size: clamp(30px, 4vw, 42px); font-weight: 600; }
+.arcade-intro p { font-size: 14px; margin: 12px auto 0; max-width: 600px; }
+.arcade-page button, .arcade-page select { background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 8px; min-height: 44px; padding: 9px 15px; font: inherit; font-size: 13px; cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s; }
+.arcade-page button:hover:not(:disabled) { background: var(--card); border-color: var(--text); }
+.arcade-page button:disabled { cursor: default; opacity: .6; }
+.arcade-page button:focus-visible, .arcade-page select:focus-visible, .arcade-page textarea:focus-visible, .arcade-page [tabindex]:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.arcade-stats { margin: 22px auto 18px; padding: 16px 22px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+.arcade-stat-line, .arcade-records { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; font-size: 12px; }
+.arcade-stat-line > span { display: grid; gap: 4px; color: var(--muted); }
+.arcade-stat-line strong { font-size: 24px; color: var(--text); font-variant-numeric: tabular-nums; }
+.xp-progress { display: grid; gap: 5px; margin-left: auto; }
+.xp-progress progress { width: 180px; height: 8px; accent-color: var(--text); }
+.arcade-records { margin-top: 16px; justify-content: space-between; align-items: start; }
+.arcade-records summary { cursor: pointer; padding-block: 10px; }
+.arcade-records dl { display: grid; gap: 6px; font-size: 12px; }
+.arcade-records dl > div { display: flex; justify-content: space-between; gap: 24px; }
+.arcade-records p { font-size: 12px; }
+.arcade-storage-note { font-size: 11px; margin-top: 8px; }
+.arcade-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 22px; }
+.arcade-tabs button { border-radius: 999px; padding-inline: 18px; font-size: 12px; }
+.arcade-tabs button[aria-selected="true"], .arcade-page button[aria-pressed="true"] { background: var(--text); color: var(--on-primary); }
+.arcade-game { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: var(--bg); box-shadow: 0 8px 28px rgb(0 0 0 / .035); text-align: center; }
+.arcade-game h2 { font-size: 24px; margin-bottom: 18px; letter-spacing: -.02em; }
+.arcade-game label { font-size: 13px; }
+.arcade-game select { margin-left: 8px; }
+.game-toolbar { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 16px; margin: 16px auto; font-size: 13px; }
+.game-toolbar > span { background: var(--card); padding: 7px 11px; border-radius: 6px; font-variant-numeric: tabular-nums; }
+.game-status { min-height: 24px; font-size: 14px; margin-block: 10px; }
+.arcade-page .game-help { font-size: 12px; line-height: 1.7; margin: 16px auto 0; max-width: 760px; }
+.game-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.game-controls button { min-width: 64px; }
+.mine-scroll { max-width: 100%; overflow: auto; padding: 4px; }
+.mine-board { display: grid; width: max-content; gap: 3px; margin: 0 auto; padding: 8px; background: var(--card); border-radius: 10px; }
+.arcade-page .mine-cell { padding: 0; min-height: var(--mine-cell, 30px); height: var(--mine-cell, 30px); width: var(--mine-cell, 30px); font-size: 15px; background: var(--card); font-weight: 700; }
+.arcade-page .mine-cell.revealed { background: var(--bg); border-color: var(--line); }
+.arcade-page .mine-cell.flagged { background: var(--text); color: var(--on-primary); border-color: var(--text); }
+.arcade-page .mine-cell:disabled { opacity: 1; }
+.match-board { display: grid; max-width: 430px; gap: 8px; margin: 18px auto; }
+.match-board button { aspect-ratio: 1; font-size: 25px; padding: 4px; background: var(--card); border-radius: 10px; box-shadow: 0 2px 0 var(--line); }
+.match-board .matched { border-color: var(--text); opacity: 1; background: var(--bg); }
+.match-board .card-visible { animation: card-reveal .16s ease-out; }
+@keyframes card-reveal { from { transform: scaleX(.85); } to { transform: scaleX(1); } }
+.typing-passage { max-width: 800px; margin-inline: auto; text-align: left; font: 16px/1.9 ui-monospace, monospace; padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); white-space: pre-wrap; }
+.typed-correct { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.typed-incorrect { background: var(--text); color: var(--bg); text-decoration: line-through; }
+.typing-label { display: grid; gap: 8px; margin: 16px auto 0; max-width: 800px; text-align: left; }
+.typing-label textarea { width: 100%; min-height: 100px; padding: 12px; border-radius: 10px; resize: vertical; font: 16px/1.6 ui-monospace, monospace; color: var(--text); background: var(--bg); border: 1px solid var(--line); }
+.typing-keyboard { max-width: 720px; margin: 22px auto 0; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.keyboard-row { display: flex; gap: 5px; margin-bottom: 5px; }
+.arcade-page .keyboard-row button { flex: 1 1 0; min-width: 0; display: grid; place-items: center; min-height: 44px; padding: 0; border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 5px; background: var(--bg); font: 13px ui-monospace, monospace; touch-action: manipulation; }
+.keyboard-row .wide-key { flex-grow: 1.5; font-size: 9px; }
+.arcade-page .keyboard-row .space-key { flex-grow: 4; }
+.arcade-page .keyboard-row .pressed-key, .arcade-page .keyboard-row button[aria-pressed="true"] { background: var(--text); color: var(--on-primary); border-color: var(--text); transform: translateY(1px); }
+.typing-keyboard p { font-size: 10px; margin-top: 10px; }
+.trivia-question { font-size: 19px; margin-block: 18px; }
+.trivia-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; max-width: 760px; margin: 20px auto; }
+.trivia-options button { text-align: left; overflow-wrap: anywhere; min-height: 58px; padding: 14px 18px; }
+.arcade-page .correct-answer { border: 2px solid var(--text); opacity: 1; font-weight: 700; }
+.arcade-page .incorrect-answer { text-decoration: line-through; }
+.keyboard-game { max-width: 900px; margin-inline: auto; border-radius: 10px; }
+.blocks-layout { display: flex; justify-content: center; align-items: start; gap: 20px; margin: 18px auto; }
+.blocks-board { display: grid; grid-template-columns: repeat(10,1fr); width: min(250px,65%); aspect-ratio: 1 / 2; border: 1px solid var(--text); background: var(--card); }
+.blocks-board span { border: 1px solid var(--line); }
+.blocks-board .filled, .blocks-next .filled { background: var(--text); border: 1px solid var(--bg); }
+.blocks-board .falling { opacity: .65; }
+.blocks-next { min-width: 0; font-size: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; text-align: left; }
+.blocks-next span { width: 18px; height: 18px; }
+.blocks-next p { font-size: 12px; margin-block: 8px 16px; }
+.runner-stage { margin: 18px auto 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
+.runner-stage-caption { display: flex; justify-content: space-between; gap: 12px; padding: 16px 20px 0; font-size: 10px; font-weight: 600; letter-spacing: .12em; color: var(--muted); }
+.runner-board { display: block; width: 100%; height: auto; min-height: 155px; touch-action: manipulation; }
+.runner-board { touch-action: none; }
+.runner-character { shape-rendering: crispEdges; }
+.runner-leg { transform-box: fill-box; transform-origin: center top; }
+.is-idle .runner-body { animation: dino-idle 1.5s ease-in-out infinite; }
+.is-idle .runner-leg, .is-running .runner-leg { animation: dino-stride .28s steps(2,end) infinite alternate; }
+.is-idle .runner-leg { animation-duration: .6s; }
+.runner-stage .runner-leg-back { animation-delay: -.28s; }
+.is-running .runner-body { animation: dino-run-bob .28s steps(2,end) infinite; }
+.is-jumping .runner-leg-front { transform: rotate(-15deg); }
+@keyframes dino-stride { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+@keyframes dino-idle { 50% { transform: translateY(-1.5px); } }
+@keyframes dino-run-bob { 50% { transform: translateY(-1px); } }
+.game-instructions { max-width: 740px; margin: 16px auto 0; font-size: 12px; color: var(--muted); }
+.game-instructions summary { display: list-item; width: fit-content; margin-inline: auto; cursor: pointer; min-height: 32px; padding: 6px; }
+.game-instructions p { margin-top: 8px; }
+@media (max-width: 600px) {
+  .arcade-page { padding-block: 28px; }
+  .arcade-stats { padding: 16px; margin-top: 20px; }
+  .arcade-game { padding: 18px 8px; border-radius: 12px; }
+  .arcade-game h2 { font-size: 22px; }
+  .arcade-intro h1 { font-size: 28px; }
+  .xp-progress { margin-left: 0; }
+  .arcade-stat-line { gap: 12px 20px; }
+  .arcade-tabs button { flex: 1 1 120px; }
+  .arcade-tabs { gap: 6px; }
+  .trivia-options { grid-template-columns: minmax(0,1fr); }
+  .game-toolbar { gap: 8px 12px; }
+  .blocks-layout { gap: 12px; }
+  .blocks-board { width: min(250px,65%); }
+  .blocks-next { padding: 8px; }
+  .mine-board { --mine-cell: clamp(24px, calc((100vw - 120px) / 9), 30px); gap: 2px; padding: 3px; }
+  .match-board { gap: 6px; }
+  .typing-passage { padding: 12px; font-size: 14px; }
+  .typing-label textarea { font-size: 16px; }
+  .typing-keyboard { padding: 6px 1px; margin-inline: -4px; }
+  .keyboard-row { gap: 1px; margin-bottom: 4px; }
+  .arcade-page .keyboard-row button { min-height: 42px; font-size: 12px; border-radius: 3px; }
+  .keyboard-row .wide-key { font-size: 11px; }
+  .runner-stage-caption { padding: 12px 10px 0; font-size: 8px; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) { .arcade-page *, .arcade-page *::before, .arcade-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
