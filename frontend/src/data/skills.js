@@ -22,6 +22,10 @@ export const skillGroups = [
     skills: ['Figma', 'UI/UX Design', '3D Web Interfaces'],
   },
   {
+    title: 'Mobile Development',
+    skills: ['FlutterFlow', 'Android SDK'],
+  },
+  {
     title: 'Development Tools & Workflow',
     skills: ['Git', 'GitHub', 'Visual Studio Code', 'Vite', 'Postman', 'Render / Web Deployment', 'Vercel', 'Cloudflare', 'XAMPP', 'Debugging & Testing', 'System Documentation', 'AI-assisted Development'],
   },
@@ -29,7 +33,7 @@ export const skillGroups = [
 
 export const featuredSkills = [
   'React.js', 'Next.js', 'JavaScript', 'Node.js', 'Express.js',
-  'MongoDB', 'Supabase Database', 'MySQL / SQL', 'Vercel', 'Cloudflare',
+  'MongoDB', 'Supabase Database', 'MySQL / SQL', 'FlutterFlow', 'Android SDK', 'Vercel', 'Cloudflare',
 ];
 
 export const skillCount = skillGroups.reduce((total, group) => total + group.skills.length, 0);
