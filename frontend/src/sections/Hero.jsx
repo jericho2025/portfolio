@@ -80,7 +80,7 @@ export default function Hero() {
         <dl className="portfolio-stats">{stats.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </section>
       <section className="home-section projects-section" aria-labelledby="selected-work">
-        <div className="section-row"><h2 id="selected-work"><span aria-hidden="true">01 · </span>Projects</h2><Link className="text-link" to="/portfolio">View all<span className="sr-only"> projects</span> <span aria-hidden="true">→</span></Link></div>
+        <div className="section-row"><h2 id="selected-work"><span aria-hidden="true">01 · </span>Projects</h2><Link className="project-all-link" to="/portfolio">all {projectCount}<span className="sr-only"> projects</span> <span aria-hidden="true">→</span></Link></div>
         <ProjectShowcase />
       </section>
       <section className="home-section stack-preview" aria-labelledby="stack-preview-title">

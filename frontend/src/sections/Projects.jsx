@@ -17,6 +17,7 @@ export const projects = [
   },
   {
     title: 'AquaBless Water Ordering & Delivery System',
+    shortTitle: 'AquaBless',
     category: 'Collaborative academic case study',
     description: 'A PHP and MySQL water ordering platform with customer, admin, operator, and rider workflows, deployed with Docker and MariaDB on Railway.',
     image: null,
@@ -31,6 +32,7 @@ export const projects = [
   },
   {
     title: 'Personal Developer Portfolio & Interactive Arcade',
+    shortTitle: 'Portfolio & Interactive Arcade',
     category: 'Personal full-stack project',
     description: 'A responsive portfolio with light and dark themes, live GitHub data, and six browser games with local scores and progress.',
     image: '/images/projects/arcade-preview.webp',
@@ -55,14 +57,17 @@ function ProjectCard({ project, heading: Heading }) {
         {project.preview === 'aquabless' ? <AquaBlessArtwork compact /> : <img className="project-preview-image" src={project.image} alt={project.alt} width={width} height={height} loading="lazy" decoding="async" />}
       </Link>
       <div className="project-card-content">
-        <p className="eyebrow">{project.category}</p>
-        <Heading>{project.title}</Heading>
-        <p>{project.description}</p>
-        <ul className="tags" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-        <div className="project-card-actions">
-          <Link className="primary-link" to={project.route}>{project.action}<span aria-hidden="true">→</span></Link>
-          <a className="project-live-link text-link" href={project.externalUrl} target="_blank" rel="noopener noreferrer">
-            {project.externalLabel} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
+        <div className="project-card-title-row">
+          <Heading title={project.title}>{project.shortTitle || project.title}</Heading>
+          <Link className="project-open-link" to={project.route} aria-label={`View details for ${project.title}`}><span aria-hidden="true">↗</span></Link>
+        </div>
+        <p className="project-card-description">{project.description}</p>
+        <div className="project-card-bottom">
+          <ul className="project-tech-list" aria-label="Featured technologies">
+            {project.tags.slice(0, 3).map(tag => <li key={tag}>{tag}</li>)}
+          </ul>
+          <a className="project-demo-link" href={project.externalUrl} target="_blank" rel="noopener noreferrer">
+            {project.externalLabel}<span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       </div>
