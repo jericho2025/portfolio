@@ -696,3 +696,47 @@ html.search-dialog-open { overflow: hidden; }
   .stack-preview .skill-tile { font-size: 12px; }
   .project-card-content { padding: 13px 14px; }
 }
+
+
+/* AquaBless real-client case study (source: team's 2025 IT-DB2 documentation). */
+.aquabless-client-heading { margin-bottom: 24px; }
+.aquabless-client-heading h1 { margin-bottom: 8px; }
+.aquabless-client-heading > p:last-child { color: var(--muted); }
+.aquabless-detail-copy > .eyebrow { margin-bottom: 10px; color: var(--muted); font-size: 10px; }
+.aquabless-detail-copy h2 { font-size: clamp(20px, 2.4vw, 27px); line-height: 1.28; letter-spacing: -.035em; margin-bottom: 15px; }
+.aquabless-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 24px; border-block: 1px solid var(--line); }
+.aquabless-facts > div { min-width: 0; padding: 15px clamp(8px, 1.6vw, 18px); display: flex; flex-direction: column; gap: 7px; }
+.aquabless-facts > div:first-child { padding-inline-start: 0; }
+.aquabless-facts > div + div { border-left: 1px solid var(--line); }
+.aquabless-facts span { font: 10px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .045em; }
+.aquabless-facts strong { font-size: 12px; line-height: 1.45; font-weight: 650; }
+.aquabless-detail-section > .eyebrow { margin-bottom: 8px; color: var(--muted); }
+.aquabless-detail-section > h2 { margin-bottom: 14px; font-size: clamp(19px, 2.3vw, 25px); letter-spacing: -.035em; }
+.aquabless-problem-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.aquabless-problem-grid > div { padding: 20px; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.aquabless-problem-grid h3 { font-size: 14px; margin-bottom: 8px; }
+.aquabless-problem-grid p, .aquabless-section-copy { max-width: 820px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+.aquabless-process-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; padding: 0; margin: 0; list-style: none; }
+.aquabless-process-list li { min-width: 0; padding: 15px 12px; border: 1px solid var(--line); border-radius: 9px; }
+.aquabless-process-number { display: inline-flex; margin-bottom: 11px; color: #168cae; font: 600 11px var(--mono); }
+.aquabless-process-list h3 { font-size: 12px; line-height: 1.4; margin-bottom: 8px; }
+.aquabless-process-list p { font-size: 11px; line-height: 1.6; color: var(--muted); }
+.aquabless-database-flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 17px; }
+.aquabless-database-flow span:nth-child(odd) { border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px; font-size: 11px; }
+.aquabless-database-flow span:nth-child(even) { color: var(--muted); font-size: 15px; }
+.aquabless-deployment-note { margin-top: 18px; }
+@media (max-width: 1100px) {
+  .aquabless-process-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .aquabless-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aquabless-facts > div:nth-child(3) { border-left: 0; padding-inline-start: 0; }
+  .aquabless-facts > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 660px) {
+  .aquabless-facts > div { padding: 12px 8px; }
+  .aquabless-facts > div strong { font-size: 11px; }
+  .aquabless-problem-grid { grid-template-columns: 1fr; }
+  .aquabless-process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+  .aquabless-process-list { grid-template-columns: 1fr; }
+}
