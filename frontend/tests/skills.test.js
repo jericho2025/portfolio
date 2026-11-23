@@ -171,7 +171,7 @@ test('AquaBless follows WISDOM-style project-first copy and keeps one clear deve
 });
 
 
-test('AquaBless uses its landing page preview, and site identity includes the existing profile photo', () => {
+test('AquaBless uses its landing page preview, while the sidebar shows the original text-only identity', () => {
   const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
   const page = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
   const nav = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
@@ -184,18 +184,18 @@ test('AquaBless uses its landing page preview, and site identity includes the ex
   assert.doesNotMatch(projects, /AquaBlessArtwork/);
   assert.doesNotMatch(page, /AquaBlessArtwork/);
   assert.match(nav, /Jericho M\. Flores/);
-  assert.match(nav, /import profilePhoto from '\.\.\/assets\/jericho-profile\.webp'/);
-  assert.match(nav, /className="wordmark-photo"/);
-  assert.match(css, /wordmark-photo/);
+  assert.match(nav, /className="wordmark"[\s\S]*?Jericho M\. Flores<\/Link>/);
+  assert.doesNotMatch(nav, /wordmark-photo|import profilePhoto/);
+  assert.doesNotMatch(css, /wordmark-photo/);
 });
 
-test('site favicon uses the actual portrait instead of initials, keeping the sidebar identity', () => {
+test('site favicon uses the actual portrait instead of initials, and the sidebar remains text-only', () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   const favicon = readFileSync(new URL('../public/favicon.svg', import.meta.url), 'utf8');
   const navigation = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
   assert.match(html, /rel="icon" href="\/favicon\.svg\?v=portrait-20261123"/);
   assert.match(favicon, /data:image\/webp;base64,UklGR/);
   assert.doesNotMatch(favicon, />JF<\/text>/);
-  assert.match(navigation, /className="wordmark-photo"/);
-  assert.match(navigation, /Jericho M\. Flores/);
+  assert.doesNotMatch(navigation, /wordmark-photo/);
+  assert.match(navigation, /className="wordmark"[\s\S]*?Jericho M\. Flores<\/Link>/);
 });

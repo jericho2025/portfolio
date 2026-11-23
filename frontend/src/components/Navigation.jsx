@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import profilePhoto from '../assets/jericho-profile.webp';
 import { platforms } from '../sections/Contact.jsx';
 import DownloadCvLink from './DownloadCvLink.jsx';
 import { searchShortcut } from './PortfolioSearch.jsx';
@@ -125,7 +124,7 @@ export default function Navigation({ theme, toggleTheme, searchOpen, openSearch 
   return (
     <header className="site-header" ref={header}>
       <div className="nav-shell" role={open ? "dialog" : undefined} aria-modal={open || undefined} aria-label={open ? "Site menu" : undefined}>
-        <Link className="wordmark" to="/" onClick={() => setOpenOn(null)}><img className="wordmark-photo" src={profilePhoto} alt="" width="36" height="36" decoding="async" /><span>Jericho M. Flores</span></Link>
+        <Link className="wordmark" to="/" onClick={() => setOpenOn(null)}>Jericho M. Flores</Link>
         <button ref={toggle} className="menu-toggle" aria-controls="main-navigation" aria-expanded={open} type="button" onClick={() => open ? dismiss() : setOpenOn(key)}><NavIcon name={open ? 'close' : 'menu'} />{open ? 'Close' : 'Menu'}</button>
         {open && <div className="menu-backdrop" aria-hidden="true" onClick={dismiss} />}
         <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
