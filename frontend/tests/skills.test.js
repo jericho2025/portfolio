@@ -169,3 +169,22 @@ test('AquaBless follows WISDOM-style project-first copy and keeps one clear deve
   assert.doesNotMatch(projects, /Sole developer|Independently developed/);
   assert.match(app, /AquaBless Water Ordering and Delivery System/);
 });
+
+
+test('AquaBless uses its landing page preview, and site identity includes the existing profile photo', () => {
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const page = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
+  const nav = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  const screenshot = readFileSync(new URL('../public/images/projects/aquabless-landing.avif', import.meta.url));
+  assert.equal(screenshot.subarray(4, 12).toString(), 'ftypavif');
+  assert.ok(screenshot.byteLength > 4000);
+  assert.match(projects, /image: '\/images\/projects\/aquabless-landing\.avif'/);
+  assert.match(page, /className="aquabless-landing-preview"/);
+  assert.doesNotMatch(projects, /AquaBlessArtwork/);
+  assert.doesNotMatch(page, /AquaBlessArtwork/);
+  assert.match(nav, /Jericho M\. Flores/);
+  assert.match(nav, /import profilePhoto from '\.\.\/assets\/jericho-profile\.webp'/);
+  assert.match(nav, /className="wordmark-photo"/);
+  assert.match(css, /wordmark-photo/);
+});
