@@ -188,3 +188,14 @@ test('AquaBless uses its landing page preview, and site identity includes the ex
   assert.match(nav, /className="wordmark-photo"/);
   assert.match(css, /wordmark-photo/);
 });
+
+test('site favicon uses the actual portrait instead of initials, keeping the sidebar identity', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const favicon = readFileSync(new URL('../public/favicon.svg', import.meta.url), 'utf8');
+  const navigation = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
+  assert.match(html, /rel="icon" href="\/favicon\.svg\?v=portrait-20261123"/);
+  assert.match(favicon, /data:image\/webp;base64,UklGR/);
+  assert.doesNotMatch(favicon, />JF<\/text>/);
+  assert.match(navigation, /className="wordmark-photo"/);
+  assert.match(navigation, /Jericho M\. Flores/);
+});
