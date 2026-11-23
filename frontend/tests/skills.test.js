@@ -150,32 +150,22 @@ test('homepage includes every approved skill and project cards keep complete des
 });
 
 
-test('AquaBless accurately presents the documented real client and avoids claiming unsupported features', () => {
+test('AquaBless follows WISDOM-style project-first copy and keeps one clear developer credit', () => {
   const detail = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
   const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
-  for (const term of [
-    'AquaBless Purified Water',
-    'four student proponents',
-    'Facebook Messenger',
-    'GCash',
-    'Customer experience',
-    'Operations',
-    'Rider workflows',
-    'Administration',
-    'From order to delivery',
-    'Database design',
-    '3NF',
-    'full inventory management',
-    'live GPS tracking',
-    'Open live website',
-  ]) assert.ok(detail.includes(term), 'Missing client case-study context: ' + term);
-  assert.match(projects, /Real client · Sole developer/);
-  assert.match(projects, /handwritten water order logs/);
-  assert.match(projects, /Independently developed for AquaBless Purified Water/);
-  assert.match(detail, /My role · Sole developer/);
-  assert.match(detail, /academic case study documentation lists four student proponents/);
-  assert.match(detail, /I was the sole developer of the system/);
-  assert.match(app, /AquaBless \| Real Client Case Study/);
-  assert.doesNotMatch(detail, /paid freelance contract|real-time GPS tracking available/i);
+  assert.match(detail, /Project Overview/);
+  assert.match(detail, /Main Features/);
+  assert.match(detail, /Technologies Used/);
+  assert.match(detail, /System Modules/);
+  assert.match(detail, /project-detail-grid/);
+  assert.match(detail, /AquaBless Purified Water/);
+  assert.match(detail, /Developer: Jericho M\. Flores/);
+  assert.match(detail, /four student proponents/);
+  assert.match(detail, /Visit Live Website/);
+  assert.match(projects, /Client-based academic project/);
+  assert.match(projects, /manages water orders, payments, rider assignments, and deliveries/);
+  assert.doesNotMatch(detail, /My role|Sole Developer|I independently|I built|My contributions/);
+  assert.doesNotMatch(projects, /Sole developer|Independently developed/);
+  assert.match(app, /AquaBless Water Ordering and Delivery System/);
 });
