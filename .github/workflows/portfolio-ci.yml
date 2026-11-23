@@ -1,0 +1,43 @@
+name: Portfolio CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [codex/stack-36-wide-dot-texture]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    name: Frontend tests and production build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run test:arcade
+      - run: node --test tests/skills.test.js
+      - run: npm run build
+        env:
+          VITE_API_BASE_URL: https://jericho-portfolio-api.onrender.com
+  backend:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm test
