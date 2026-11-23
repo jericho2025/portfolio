@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [codex/stack-36-wide-dot-texture]
+    branches: ['codex/**']
 permissions:
   contents: read
 jobs:
