@@ -199,3 +199,14 @@ test('site favicon uses the actual portrait instead of initials, and the sidebar
   assert.doesNotMatch(navigation, /wordmark-photo/);
   assert.match(navigation, /className="wordmark"[\s\S]*?Jericho M\. Flores<\/Link>/);
 });
+
+test('GitHub stays available as a page without a separate Explore sidebar entry', () => {
+  const navigation = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(navigation, /\['\/github', 'GitHub', 'github'\]/);
+  assert.match(navigation, /\['\/#featured', 'Featured', 'featured'\]/);
+  assert.match(navigation, /\['\/arcade', 'Arcade', 'arcade'/);
+  assert.match(app, /Route path="\/github"/);
+  assert.match(projects, /https:\/\/github\.com\/jericho2025\/portfolio/);
+});
