@@ -116,11 +116,11 @@ test('AquaBless is discoverable as a deployed case study without exposing its pr
   assert.doesNotMatch(projects, /github\.com\/jericho2025\/awods/);
 });
 
-test('reference-inspired portfolio layout keeps compact three-column project cards with responsive breaks', () => {
+test('project layout displays two cards with responsive single-column break', () => {
   const css = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
   const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
   const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
-  assert.match(css, /\.portfolio-grid \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.portfolio-grid \{[^}]*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(css, /@media \(max-width: 1250px\) \{[\s\S]*?\.portfolio-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
   assert.match(css, /@media \(max-width: 660px\) \{[\s\S]*?\.portfolio-grid \{ grid-template-columns: minmax\(0, 1fr\); \}/);
   assert.match(css, /\.portfolio-stats dd \{[^}]*font-size: clamp\(22px, 2vw, 28px\)/);
@@ -143,7 +143,7 @@ test('homepage includes every approved skill and project cards keep complete des
   assert.doesNotMatch(projects, /project\.tags\.slice\(/);
   assert.match(projects, /project-card-category/);
   assert.match(projects, /<Heading>\{project\.title\}<\/Heading>/);
-  assert.match(styles, /\.portfolio-grid \{[^\n]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(styles, /\.portfolio-grid \{[^\n]*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(styles, /-webkit-line-clamp/);
   assert.match(projects, /externalLabel: 'Live website'/);
   assert.match(aqua, /Visit Live Website/);
@@ -209,4 +209,18 @@ test('GitHub stays available as a page without a separate Explore sidebar entry'
   assert.match(navigation, /\['\/arcade', 'Arcade', 'arcade'/);
   assert.match(app, /Route path="\/github"/);
   assert.match(projects, /https:\/\/github\.com\/jericho2025\/portfolio/);
+});
+
+test('only WISDOM and AquaBless are shown as Projects; Arcade remains a standalone page', () => {
+  const projectsSource = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
+  assert.match(projectsSource, /title: 'WISDOM'/);
+  assert.match(projectsSource, /title: 'AquaBless Water Ordering & Delivery System'/);
+  assert.doesNotMatch(projectsSource, /Personal Developer Portfolio & Interactive Arcade|route: '\/arcade'/);
+  assert.match(projectsSource, /projectCount = projects\.length/);
+  assert.match(hero, /<ProjectShowcase \/>/);
+  assert.match(hero, /\[arcadeGames\.length, 'Arcade games'\]/);
+  assert.match(app, /Route path="\/arcade"/);
+  assert.doesNotMatch(app, /and the Personal Developer Portfolio & Interactive Arcade/);
 });
