@@ -18,8 +18,8 @@ export const projects = [
   {
     title: 'AquaBless Water Ordering & Delivery System',
     shortTitle: 'AquaBless',
-    category: 'Collaborative academic case study',
-    description: 'A PHP and MySQL water ordering platform with customer, admin, operator, and rider workflows, deployed with Docker and MariaDB on Railway.',
+    category: 'Real client · Academic team project',
+    description: 'Built with a four-member team for AquaBless Purified Water, replacing handwritten water order logs with customer ordering, payment review, rider assignments and delivery records.',
     image: null,
     alt: 'AquaBless water ordering and delivery project preview',
     dimensions: [960, 540],
