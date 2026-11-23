@@ -50,7 +50,7 @@ test('full Tech Stack contains exactly 38 approved technical skills', () => {
   assert.equal(skillGroups.length, 7);
   assert.equal(actual.length, 38);
   assert.equal(skillCount, 38);
-  assert.equal(new Set(actual).size, 36);
+  assert.equal(new Set(actual).size, 38);
   assert.deepEqual([...actual].sort(), [...approvedSkills].sort());
   assert.equal(actual.some(skill => aiWorkflowTools.includes(skill)), false);
   assert.equal(featuredSkills.every(skill => actual.includes(skill)), true);
