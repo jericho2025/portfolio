@@ -15,7 +15,7 @@ const Services = lazy(() => import('./sections/Services.jsx'));
 const Arcade = lazy(() => import('./sections/Arcade.jsx'));
 
 const homeMetadata = {
-  title: 'Jericho M. Flores | Aspiring Full-Stack Web Developer',
+  title: 'Jericho M. Flores | Web and Mobile Developer',
   description: 'Jericho M. Flores is an aspiring full-stack web developer in Marilao, Bulacan, Philippines. Explore his projects, technical skills, and interactive Arcade.',
 };
 
