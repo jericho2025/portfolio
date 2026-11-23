@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import AquaBlessFeatureShowcase from '../components/AquaBlessFeatureShowcase.jsx';
+import AquaBlessArtwork from '../components/AquaBlessArtwork.jsx';
 
 const liveUrl = 'https://aquabless-web-production.up.railway.app/';
 
@@ -79,17 +79,18 @@ export default function AquaBlessProject() {
       <section className="aquabless-detail-section" aria-labelledby="aquabless-modules-title">
         <p className="eyebrow">System Preview</p>
         <h2 id="aquabless-modules-title">System Modules</h2>
-        <div className="aquabless-module-grid">
-          {features.map(feature => (
-            <section key={feature.title} className="aquabless-module">
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </section>
-          ))}
+        <div className="aquabless-detail-layout">
+          <AquaBlessArtwork />
+          <div className="aquabless-module-grid">
+            {features.map(feature => (
+              <section key={feature.title} className="aquabless-module">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
-
-      <AquaBlessFeatureShowcase />
     </article>
   );
 }
