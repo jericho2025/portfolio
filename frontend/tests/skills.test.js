@@ -156,7 +156,7 @@ test('AquaBless accurately presents the documented real client and avoids claimi
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
   for (const term of [
     'AquaBless Purified Water',
-    'four-member student team',
+    'four student proponents',
     'Facebook Messenger',
     'GCash',
     'Customer experience',
@@ -170,8 +170,12 @@ test('AquaBless accurately presents the documented real client and avoids claimi
     'live GPS tracking',
     'Open live website',
   ]) assert.ok(detail.includes(term), 'Missing client case-study context: ' + term);
-  assert.match(projects, /Real client · Academic team project/);
+  assert.match(projects, /Real client · Sole developer/);
   assert.match(projects, /handwritten water order logs/);
+  assert.match(projects, /Independently developed for AquaBless Purified Water/);
+  assert.match(detail, /My role · Sole developer/);
+  assert.match(detail, /academic case study documentation lists four student proponents/);
+  assert.match(detail, /I was the sole developer of the system/);
   assert.match(app, /AquaBless \| Real Client Case Study/);
   assert.doesNotMatch(detail, /paid freelance contract|real-time GPS tracking available/i);
 });
