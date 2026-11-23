@@ -6,6 +6,7 @@ import { searchShortcut } from './PortfolioSearch.jsx';
 import { arcadeGames } from '../data/arcadeGames.js';
 import { skillCount } from '../data/skills.js';
 import { projectCount } from '../sections/Projects.jsx';
+import { useLivePresence } from '../hooks/useLivePresence.js';
 
 const groups = [
   { label: 'Explore', links: [
@@ -47,6 +48,7 @@ function NavIcon({ name }) {
 
 export default function Navigation({ theme, toggleTheme, searchOpen, openSearch }) {
   const [openOn, setOpenOn] = useState(null);
+  const onlineNow = useLivePresence();
   const toggle = useRef(null);
   const header = useRef(null);
   const { pathname, hash, key } = useLocation();
@@ -127,6 +129,10 @@ export default function Navigation({ theme, toggleTheme, searchOpen, openSearch 
         {open && <div className="menu-backdrop" aria-hidden="true" onClick={dismiss} />}
         <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
           {groups.map(({ label, links }) => <div className="nav-group" key={label}><p>{label}</p>{links.map(renderLink)}</div>)}
+          <div className="online-presence" title="Approximate number of active browser sessions in the last minute; not total historical visits.">
+            <span className={onlineNow === null ? 'presence-dot is-unavailable' : 'presence-dot'} aria-hidden="true" />
+            <span>{onlineNow === null ? 'Live count unavailable' : `${onlineNow} here now`}</span>
+          </div>
           <div className="nav-actions">
             <p className="eyebrow nav-utilities">Utilities</p>
             <button className="nav-search" type="button" aria-haspopup="dialog" aria-controls="portfolio-search" onClick={() => { if (open) dismiss(); openSearch(); }}><NavIcon name="search" />Search <kbd aria-hidden="true">{searchShortcut}</kbd></button>
