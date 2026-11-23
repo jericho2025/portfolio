@@ -184,7 +184,7 @@ test('AquaBless uses its landing page preview, while the sidebar shows the origi
   assert.doesNotMatch(projects, /AquaBlessArtwork/);
   assert.doesNotMatch(page, /AquaBlessArtwork/);
   assert.match(nav, /Jericho M\. Flores/);
-  assert.match(nav, /className="wordmark"[^>]*>Jericho M\. Flores<\/Link>/);
+  assert.match(nav, /className="wordmark"[\s\S]*?Jericho M\. Flores<\/Link>/);
   assert.doesNotMatch(nav, /wordmark-photo|import profilePhoto/);
   assert.doesNotMatch(css, /wordmark-photo/);
 });
@@ -197,5 +197,5 @@ test('site favicon uses the actual portrait instead of initials, and the sidebar
   assert.match(favicon, /data:image\/webp;base64,UklGR/);
   assert.doesNotMatch(favicon, />JF<\/text>/);
   assert.doesNotMatch(navigation, /wordmark-photo/);
-  assert.match(navigation, /className="wordmark"[^>]*>Jericho M\. Flores<\/Link>/);
+  assert.match(navigation, /className="wordmark"[\s\S]*?Jericho M\. Flores<\/Link>/);
 });
