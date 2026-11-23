@@ -109,10 +109,10 @@ test('AquaBless is discoverable as a deployed case study without exposing its pr
   assert.match(app, /Route path="\/portfolio\/aquabless"/);
   assert.match(app, /'\/portfolio\/aquabless':/);
   assert.match(hero, /to="\/portfolio\/aquabless"/);
-  assert.match(detail, /Customer experience/);
-  assert.match(detail, /Operations/);
-  assert.match(detail, /Rider workflows/);
-  assert.match(detail, /Administration/);
+  assert.match(detail, /Customer/);
+  assert.match(detail, /Operator/);
+  assert.match(detail, /Rider/);
+  assert.match(detail, /Admin/);
   assert.doesNotMatch(projects, /github\.com\/jericho2025\/awods/);
 });
 
@@ -146,7 +146,7 @@ test('homepage includes every approved skill and project cards keep complete des
   assert.match(styles, /\.portfolio-grid \{[^\n]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(styles, /-webkit-line-clamp/);
   assert.match(projects, /externalLabel: 'Live website'/);
-  assert.match(aqua, /Open live website/);
+  assert.match(aqua, /Visit Live Website/);
 });
 
 
