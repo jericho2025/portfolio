@@ -27,7 +27,7 @@ export const projects = [
     route: '/portfolio/aquabless',
     action: 'Explore project',
     externalUrl: 'https://aquabless-web-production.up.railway.app/',
-    externalLabel: 'Live demo',
+    externalLabel: 'Live website',
     preview: 'aquabless',
   },
   {
@@ -57,15 +57,17 @@ function ProjectCard({ project, heading: Heading }) {
         {project.preview === 'aquabless' ? <AquaBlessArtwork compact /> : <img className="project-preview-image" src={project.image} alt={project.alt} width={width} height={height} loading="lazy" decoding="async" />}
       </Link>
       <div className="project-card-content">
+        <p className="eyebrow project-card-category">{project.category}</p>
         <div className="project-card-title-row">
-          <Heading title={project.title}>{project.shortTitle || project.title}</Heading>
+          <Heading>{project.title}</Heading>
           <Link className="project-open-link" to={project.route} aria-label={`View details for ${project.title}`}><span aria-hidden="true">↗</span></Link>
         </div>
         <p className="project-card-description">{project.description}</p>
+        <ul className="project-tech-list" aria-label="All project technologies">
+          {project.tags.map(tag => <li key={tag}>{tag}</li>)}
+        </ul>
         <div className="project-card-bottom">
-          <ul className="project-tech-list" aria-label="Featured technologies">
-            {project.tags.slice(0, 3).map(tag => <li key={tag}>{tag}</li>)}
-          </ul>
+          <Link className="project-demo-link" to={project.route}>{project.action} <span aria-hidden="true">→</span></Link>
           <a className="project-demo-link" href={project.externalUrl} target="_blank" rel="noopener noreferrer">
             {project.externalLabel}<span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
           </a>
