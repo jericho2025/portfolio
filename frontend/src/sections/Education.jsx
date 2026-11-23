@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 export default function Education() {
   return (
     <section id="journey" className="education-section" aria-labelledby="education-title" tabIndex={-1}>
-      <p className="eyebrow">Milestones</p>
       <h2 id="education-title">Journey</h2>
       <ol className="journey-timeline">
         <li>
