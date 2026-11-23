@@ -4,17 +4,40 @@ import profilePhoto from '../assets/jericho-profile.webp';
 import { ContactIcon, platforms } from './Contact.jsx';
 import { ProjectShowcase, projectCount } from './Projects.jsx';
 import { SkillList } from './Skills.jsx';
-import { featuredSkills, skillGroups } from '../data/skills.js';
+import { featuredSkills, skillCount } from '../data/skills.js';
 import { wisdomFeatures } from '../data/wisdomFeatures.js';
 
-const featuredTools = ['React', 'Node.js', 'Three.js', 'Git'];
+import { arcadeGames } from '../data/arcadeGames.js';
+import { workflowIcons } from '../data/workflowIcons.js';
+
+const workflowTools = ['ChatGPT', 'Cursor', 'Gemini', 'Grok', 'Claude', 'GitHub Copilot'];
+
+function WorkflowTools() {
+  return (
+    <div className="home-tools">
+      <p id="hero-tools" className="eyebrow">AI tools in my workflow</p>
+      <ul className="workflow-pills" aria-labelledby="hero-tools">
+        {workflowTools.map(tool => (
+          <li key={tool}>
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">
+              {workflowIcons[tool] ? <path fill="currentColor" d={workflowIcons[tool]} /> :
+                <path fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round"
+                  d={tool === 'ChatGPT' ? 'M4 5h16v11H9l-5 4z M8 9h8 M8 12h5' : 'M5 19 19 5 M11 5h8v8 M5 13v6h6'} />}
+            </svg>
+            {tool}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function Hero() {
   const stats = [
     [projectCount, 'Featured projects'],
+    [arcadeGames.length, 'Arcade games'],
+    [skillCount, 'Technical skills'],
     [wisdomFeatures.length, 'WISDOM feature walkthroughs'],
-    [skillGroups.reduce((total, { skills }) => total + skills.length, 0), 'Listed skills and tools'],
-    [2026, 'Expected graduation'],
   ];
 
   return (
@@ -24,13 +47,10 @@ export default function Hero() {
         <div className="home-introduction">
           <p className="eyebrow home-meta"><span>Aspiring Full-Stack Web Developer</span><span>Marilao, Bulacan, Philippines</span></p>
           <h1 id="home-title">Jericho M. Flores</h1>
-          <p>I build responsive web interfaces and the APIs behind them.</p>
+          <p>I build responsive interfaces with React and JavaScript, and the APIs behind them with Node.js and Express.</p>
           <p>On WISDOM, a collaborative capstone for Spiral Wood Services, I contributed to the frontend, backend APIs, and an interactive 3D blueprint editor.</p>
           <Link className="capstone-pill" to="/portfolio/wisdom">WISDOM <span aria-hidden="true">·</span> Collaborative capstone <span aria-hidden="true">↗</span></Link>
-          <div className="home-tools">
-            <p id="hero-tools" className="eyebrow">Development tools</p>
-            <ul className="tags" aria-labelledby="hero-tools">{featuredTools.map(tool => <li key={tool}>{tool}</li>)}</ul>
-          </div>
+          <WorkflowTools />
           <ul className="home-socials" aria-label="Social and contact links">
             {platforms.filter(({ href }) => href).map(({ id, label, href }) => {
               const external = id !== 'email';
@@ -43,6 +63,7 @@ export default function Hero() {
                 </li>
               );
             })}
+            <li><DownloadCvLink /></li>
           </ul>
         </div>
       </section>
@@ -50,14 +71,14 @@ export default function Hero() {
         <h2 id="featured-title" className="eyebrow">Selected highlights</h2>
         <div className="highlight-grid">
           <Link to="/portfolio/wisdom"><strong>WISDOM</strong><span>Capstone</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
-          <Link to="/portfolio/wisdom"><strong>Spiral Wood Services</strong><span>Sales and inventory</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
+          <Link to="/arcade"><strong>Portfolio &amp; Interactive Arcade</strong><span>Personal project</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
           <Link to="/about#journey"><strong>Pambayang Dalubhasaan ng Marilao</strong><span>Information Technology</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
         </div>
       </section>
       <section className="home-section" aria-label="Portfolio at a glance">
         <dl className="portfolio-stats">{stats.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </section>
-      <section className="home-section" aria-labelledby="selected-work">
+      <section className="home-section projects-section" aria-labelledby="selected-work">
         <div className="section-row"><h2 id="selected-work"><span aria-hidden="true">01 · </span>Projects</h2><Link className="text-link" to="/portfolio">View all<span className="sr-only"> projects</span> <span aria-hidden="true">→</span></Link></div>
         <ProjectShowcase />
       </section>

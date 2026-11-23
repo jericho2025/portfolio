@@ -28,3 +28,6 @@ export const skillGroups = [
 export const featuredSkills = [
   'React.js', 'JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'MySQL / SQL', 'Git', 'Figma',
 ];
+
+export const skillCount = skillGroups.reduce((total, group) => total + group.skills.length, 0);
+export const skillGroupId = title => 'skill-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');

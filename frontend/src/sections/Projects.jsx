@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const projects = [
+export const projects = [
   {
     title: 'WISDOM',
     category: 'Collaborative capstone',

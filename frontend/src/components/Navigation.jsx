@@ -2,18 +2,22 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { platforms } from '../sections/Contact.jsx';
 import DownloadCvLink from './DownloadCvLink.jsx';
+import { searchShortcut } from './PortfolioSearch.jsx';
+import { arcadeGames } from '../data/arcadeGames.js';
+import { skillCount } from '../data/skills.js';
+import { projectCount } from '../sections/Projects.jsx';
 
 const groups = [
   { label: 'Explore', links: [
     ['/#featured', 'Featured', 'featured'],
     ['/github', 'GitHub', 'github'],
-    ['/arcade', 'Arcade', 'arcade'],
+    ['/arcade', 'Arcade', 'arcade', arcadeGames.length],
   ] },
   { label: 'Portfolio', links: [
     ['/', 'Home', 'home'],
-    ['/portfolio', 'Projects', 'projects'],
-    ['/about', 'Journey', 'journey'],
-    ['/about#skills', 'Stack', 'stack'],
+    ['/portfolio', 'Projects', 'projects', projectCount],
+    ['/about#journey', 'Journey', 'journey'],
+    ['/about#skills', 'Stack', 'stack', skillCount],
     ['/services', 'Services', 'services'],
     ['/#availability', 'Availability', 'contact'],
   ] },
@@ -33,6 +37,7 @@ const icons = {
   contact: 'M3 5h18v14H3z m0 1 9 7 9-7',
   theme: 'M20 15a8 8 0 0 1-11-11 8.5 8.5 0 1 0 11 11z',
   menu: 'M3 6h18 M3 12h18 M3 18h18',
+  search: 'M10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z M16 16l4 4',
   close: 'm5 5 14 14 M19 5 5 19',
 };
 
@@ -40,12 +45,18 @@ function NavIcon({ name }) {
   return <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={icons[name]} /></svg>;
 }
 
-export default function Navigation({ theme, toggleTheme }) {
+export default function Navigation({ theme, toggleTheme, searchOpen, openSearch }) {
   const [openOn, setOpenOn] = useState(null);
   const toggle = useRef(null);
   const header = useRef(null);
   const { pathname, hash, key } = useLocation();
-  const open = openOn === key;
+  const drawerRequested = openOn === key;
+  const open = drawerRequested && !searchOpen;
+  useLayoutEffect(() => {
+    if (!searchOpen || !drawerRequested) return;
+    setOpenOn(null);
+    toggle.current?.focus();
+  }, [searchOpen, drawerRequested]);
   const normalizedPath = pathname.toLowerCase().replace(/\/+$/, '') || '/';
 
   useLayoutEffect(() => {
@@ -99,12 +110,12 @@ export default function Navigation({ theme, toggleTheme }) {
     toggle.current?.focus();
   }
 
-  function renderLink([path, label, icon]) {
+  function renderLink([path, label, icon, count]) {
     const [destination, fragment] = path.split('#');
     const selected = fragment
-      ? normalizedPath === destination && hash === '#' + fragment
+      ? normalizedPath === destination && (hash === '#' + fragment || (fragment === 'journey' && !hash))
       : (normalizedPath === destination && !hash) || (destination === '/portfolio' && normalizedPath.startsWith('/portfolio/'));
-    return <Link key={path} className={selected ? 'active' : undefined} aria-current={selected ? (fragment ? 'location' : 'page') : undefined} to={path} onClick={() => setOpenOn(null)}><NavIcon name={icon} />{label}</Link>;
+    return <Link key={path} className={selected ? 'active' : undefined} aria-current={selected ? (fragment ? 'location' : 'page') : undefined} to={path} onClick={() => setOpenOn(null)}><NavIcon name={icon} />{label}{count != null && <span className="nav-count" aria-hidden="true">{count}</span>}</Link>;
   }
 
   const themeLabel = theme === 'dark' ? 'Light mode' : 'Dark mode';
@@ -117,6 +128,8 @@ export default function Navigation({ theme, toggleTheme }) {
         <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
           {groups.map(({ label, links }) => <div className="nav-group" key={label}><p>{label}</p>{links.map(renderLink)}</div>)}
           <div className="nav-actions">
+            <p className="eyebrow nav-utilities">Utilities</p>
+            <button className="nav-search" type="button" aria-haspopup="dialog" aria-controls="portfolio-search" onClick={() => { if (open) dismiss(); openSearch(); }}><NavIcon name="search" />Search <kbd aria-hidden="true">{searchShortcut}</kbd></button>
             <button className="theme-toggle" type="button" onClick={toggleTheme}><NavIcon name="theme" />{themeLabel}</button>
             <DownloadCvLink onClick={open ? dismiss : undefined} />
             <NavLink to="/contact" onClick={() => setOpenOn(null)}><NavIcon name="contact" />Get in touch</NavLink>
