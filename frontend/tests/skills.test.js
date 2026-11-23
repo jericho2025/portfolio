@@ -115,3 +115,18 @@ test('AquaBless is discoverable as a deployed case study without exposing its pr
   assert.match(detail, /Administration/);
   assert.doesNotMatch(projects, /github\.com\/jericho2025\/awods/);
 });
+
+test('reference-inspired portfolio layout keeps compact three-column project cards with responsive breaks', () => {
+  const css = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
+  assert.match(css, /\.portfolio-grid \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 1250px\) \{[\s\S]*?\.portfolio-grid \{ grid-template-columns: repeat\(2, minmax\(0, 1fr\)\); \}/);
+  assert.match(css, /@media \(max-width: 660px\) \{[\s\S]*?\.portfolio-grid \{ grid-template-columns: minmax\(0, 1fr\); \}/);
+  assert.match(css, /\.portfolio-stats dd \{[^}]*font-size: clamp\(22px, 2vw, 28px\)/);
+  assert.match(projects, /project-card-title-row/);
+  assert.match(projects, /project-card-description/);
+  assert.match(projects, /project-demo-link/);
+  assert.match(projects, /shortTitle: 'AquaBless'/);
+  assert.match(hero, /all \{projectCount\}/);
+});
