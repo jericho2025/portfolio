@@ -96,3 +96,22 @@ test('hero uses separate AI workflow section and wider dotted texture', () => {
   assert.match(css, /background-image: radial-gradient\(circle, var\(--hero-dot\)/);
   assert.match(css, /mask-image: radial-gradient\(ellipse 77% 76%/);
 });
+
+
+test('AquaBless is discoverable as a deployed case study without exposing its private source', () => {
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
+  const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
+  const detail = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
+  assert.match(projects, /AquaBless Water Ordering/);
+  assert.match(projects, /\/portfolio\/aquabless/);
+  assert.match(projects, /aquabless-web-production\.up\.railway\.app/);
+  assert.match(app, /Route path="\/portfolio\/aquabless"/);
+  assert.match(app, /'\/portfolio\/aquabless':/);
+  assert.match(hero, /to="\/portfolio\/aquabless"/);
+  assert.match(detail, /Customer experience/);
+  assert.match(detail, /Operations/);
+  assert.match(detail, /Rider workflows/);
+  assert.match(detail, /Administration/);
+  assert.doesNotMatch(projects, /github\.com\/jericho2025\/awods/);
+});
