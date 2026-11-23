@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import AquaBlessArtwork from '../components/AquaBlessArtwork.jsx';
 
 const liveUrl = 'https://aquabless-web-production.up.railway.app/';
 
@@ -80,7 +79,7 @@ export default function AquaBlessProject() {
         <p className="eyebrow">System Preview</p>
         <h2 id="aquabless-modules-title">System Modules</h2>
         <div className="aquabless-detail-layout">
-          <AquaBlessArtwork />
+          <img className="aquabless-landing-preview" src="/images/projects/aquabless-landing.avif" alt="AquaBless website landing page with a water splash and Order Now button" width="960" height="540" loading="lazy" decoding="async" />
           <div className="aquabless-module-grid">
             {features.map(feature => (
               <section key={feature.title} className="aquabless-module">
