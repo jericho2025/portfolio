@@ -13,7 +13,7 @@ export default function WisdomFeatureShowcase() {
       </div>
       <p className="sr-only" role="status">Selected feature: {selected.name}</p>
       <section id="selected-feature" className="selected-feature" aria-labelledby="selected-feature-title">
-        <div className="feature-explanation"><h3 id="selected-feature-title">{selected.name}</h3><p>{selected.description}</p></div>
+        <div className="feature-explanation"><h3 id="selected-feature-title">{selected.name}</h3><p>{selected.description}</p>{selected.functions?.length > 0 && <div className="feature-capabilities"><h4>What the system can do</h4><ul>{selected.functions.map(item => <li key={item}>{item}</li>)}</ul></div>}</div>
         {selected.mediaNote && <p className="feature-media-note">{selected.mediaNote}</p>}
         <FeatureMediaGallery key={`${selected.id}:${selected.media.map(item => item.src).join('|')}`} media={selected.media} missingMedia={selected.missingMedia} />
       </section>

@@ -18,7 +18,7 @@ export const projects = [
     title: 'AquaBless Water Ordering & Delivery System',
     shortTitle: 'AquaBless',
     category: 'Client-based academic project',
-    description: 'A PHP and MySQL web system for AquaBless Purified Water that manages water orders, payments, rider assignments, and deliveries.',
+    description: 'A PHP and MySQL system for AquaBless Purified Water (AWODS) that manages water orders, payments, rider assignments, and deliveries, with stock tracking and reports.',
     image: '/images/projects/aquabless-landing.avif',
     alt: 'AquaBless landing page showing Welcome to AquaBless, an Order Now button, and a blue water splash',
     dimensions: [960, 540],
