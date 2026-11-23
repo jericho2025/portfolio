@@ -22,7 +22,7 @@ const homeMetadata = {
 const routeMetadata = {
   '/': homeMetadata,
   '/about': { title: 'About & Journey', description: 'Learn about Jericho M. Flores, his information technology education, professional development, and technical skills.' },
-  '/portfolio': { title: 'Projects', description: 'Explore WISDOM, AquaBless Water Ordering and Delivery System, and the Personal Developer Portfolio & Interactive Arcade by Jericho M. Flores.' },
+  '/portfolio': { title: 'Projects', description: 'Explore WISDOM and AquaBless Water Ordering and Delivery System, two web application projects by Jericho M. Flores.' },
   '/portfolio/wisdom': { title: 'WISDOM', description: 'Explore the collaborative WISDOM capstone for furniture sales, inventory, and customization, including eight feature walkthroughs.' },
   '/portfolio/aquabless': { title: 'AquaBless | Real Client Case Study', description: 'AquaBless Water Ordering and Delivery System (AWODS) is a web application for AquaBless Purified Water, covering online ordering, payments, rider assignments, and deliveries.' },
   '/services': { title: 'Services', description: 'See the web development services offered by Jericho M. Flores.' },
