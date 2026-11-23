@@ -71,7 +71,7 @@
 .runner-stage { margin: 18px auto 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
 .runner-stage-caption { display: flex; justify-content: space-between; gap: 12px; padding: 16px 20px 0; font-size: 10px; font-weight: 600; letter-spacing: .12em; color: var(--muted); }
 .runner-board { display: block; width: 100%; height: auto; min-height: 155px; touch-action: manipulation; }
-.runner-board { touch-action: none; }
+
 .runner-character { shape-rendering: crispEdges; }
 .runner-leg { transform-box: fill-box; transform-origin: center top; }
 .is-idle .runner-body { animation: dino-idle 1.5s ease-in-out infinite; }
@@ -87,28 +87,30 @@
 .game-instructions summary { display: list-item; width: fit-content; margin-inline: auto; cursor: pointer; min-height: 32px; padding: 6px; }
 .game-instructions p { margin-top: 8px; }
 @media (max-width: 600px) {
-  .arcade-page { padding-block: 28px; }
-  .arcade-stats { padding: 16px; margin-top: 20px; }
+  .arcade-page { padding-block: 22px 32px; }
+  .arcade-stats { padding: 12px; margin: 14px auto 12px; }
   .arcade-game { padding: 18px 8px; border-radius: 12px; }
   .arcade-game h2 { font-size: 22px; }
   .arcade-intro h1 { font-size: 28px; }
   .xp-progress { margin-left: 0; }
   .arcade-stat-line { gap: 12px 20px; }
   .arcade-tabs button { flex: 1 1 120px; }
-  .arcade-tabs { gap: 6px; }
+  .arcade-tabs { gap: 6px; margin-bottom: 14px; }
   .trivia-options { grid-template-columns: minmax(0,1fr); }
   .game-toolbar { gap: 8px 12px; }
   .blocks-layout { gap: 12px; }
   .blocks-board { width: min(250px,65%); }
   .blocks-next { padding: 8px; }
-  .mine-board { --mine-cell: clamp(24px, calc((100vw - 120px) / 9), 30px); gap: 2px; padding: 3px; }
+  .mine-scroll { container-type: inline-size; overscroll-behavior-inline: contain; }
+  .mine-board { --mine-cell: clamp(24px, calc((100cqi - 22px) / 9), 36px); gap: 2px; padding: 3px; }
   .match-board { gap: 6px; }
   .typing-passage { padding: 12px; font-size: 14px; }
   .typing-label textarea { font-size: 16px; }
   .typing-keyboard { padding: 6px 1px; margin-inline: -4px; }
   .keyboard-row { gap: 1px; margin-bottom: 4px; }
-  .arcade-page .keyboard-row button { min-height: 42px; font-size: 12px; border-radius: 3px; }
+  .arcade-page .keyboard-row button { min-height: 48px; font-size: 12px; border-radius: 3px; }
   .keyboard-row .wide-key { font-size: 11px; }
+  .game-instructions summary, .arcade-records summary { min-height: 44px; }
   .runner-stage-caption { padding: 12px 10px 0; font-size: 8px; letter-spacing: .06em; }
 }
 @media (prefers-reduced-motion: reduce) { .arcade-page *, .arcade-page *::before, .arcade-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

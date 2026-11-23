@@ -1,9 +1,30 @@
-const groups = [
-  ['Frontend', ['React.js', 'JavaScript / JSX', 'HTML5', 'CSS3', 'Responsive design']],
-  ['Backend', ['Node.js', 'Express.js', 'REST APIs', 'API integration']],
-  ['Workflow', ['Git', 'GitHub', 'VS Code', 'Vite', 'Debugging']],
-];
+import { skillGroups } from '../data/skills.js';
+
+export function SkillList({ skills, label }) {
+  return (
+    <ul className="skill-tiles" aria-label={label}>
+      {skills.map(skill => <li className="skill-tile" key={skill}>{skill}</li>)}
+    </ul>
+  );
+}
+
+function SkillCategory({ title, skills }) {
+  return (
+    <div className="skill-group">
+      <h3>{title}</h3>
+      <SkillList skills={skills} />
+    </div>
+  );
+}
 
 export default function Skills() {
-  return <section className="skills-section" aria-labelledby="skills-title"><h2 id="skills-title">Technical Skills</h2><div className="skills-list">{groups.map(([title, skills]) => <div className="skill-group" key={title}><h3>{title}</h3><ul className="tags">{skills.map(skill => <li key={skill}>{skill}</li>)}</ul></div>)}</div></section>;
+  return (
+    <section id="skills" className="skills-section" tabIndex={-1} aria-labelledby="skills-title">
+      <p className="eyebrow">Technical skills</p>
+      <h2 id="skills-title">Tech Stack</h2>
+      <div className="skills-list">
+        {skillGroups.map(group => <SkillCategory key={group.title} {...group} />)}
+      </div>
+    </section>
+  );
 }

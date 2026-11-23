@@ -1,13 +1,13 @@
-const platforms = [
+export const platforms = [
   { id: 'email', label: 'Email', value: 'jerichoflores57@gmail.com', href: 'mailto:jerichoflores57@gmail.com' },
   { id: 'github', label: 'GitHub', value: 'jericho2025', href: 'https://github.com/jericho2025' },
   { id: 'facebook', label: 'Facebook', value: 'Jericho Flores', href: 'https://www.facebook.com/jericho.flores.554011' },
   { id: 'telegram', label: 'Telegram', value: '@reaperrr', href: 'https://t.me/reaperrr' },
   { id: 'discord', label: 'Discord', value: 'jericho_202' },
-  { id: 'linkedin', label: 'LinkedIn', value: 'Coming Soon' },
+  { id: 'linkedin', label: 'LinkedIn', value: 'jerichomflores', href: 'https://www.linkedin.com/in/jerichomflores/' },
 ];
 
-function ContactIcon({ platform }) {
+export function ContactIcon({ platform }) {
   const icons = {
     email: <><rect x="3" y="5" width="18" height="14" rx="1" /><path d="m3 6 9 7 9-7" /></>,
     github: <path d="M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-3c3-.3 6-1.5 6-6a4.7 4.7 0 0 0-1.3-3.3A4.3 4.3 0 0 0 18.5 2S17.4 1.7 15 3.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.3 4.3 0 0 0-.2 3.7A4.7 4.7 0 0 0 4 9c0 4.5 3 5.7 6 6a3.5 3.5 0 0 0-1 3v4" />,
@@ -20,21 +20,25 @@ function ContactIcon({ platform }) {
 }
 
 export default function Contact() {
+  const email = platforms.find(platform => platform.id === 'email');
+
   return (
     <section className="page-content contact-page" aria-labelledby="contact-title">
       <div className="contact-introduction">
-        <h1 id="contact-title">Let's talk.</h1>
-        <p>Open to employment opportunities, freelance projects, and collaborations.</p>
-        <dl className="contact-location"><div><dt>Location</dt><dd>Marilao, Bulacan, Philippines</dd></div></dl>
+        <p className="eyebrow">Contact</p>
+        <h1 id="contact-title">Let's Work Together</h1>
+        <p className="contact-description">Have a project in mind, an opportunity to discuss, or an idea worth building? Feel free to get in touch.</p>
+        <p className="contact-identity"><strong>Jericho M. Flores</strong><br />Marilao, Bulacan, Philippines</p>
+        <a className="primary-link" href={email.href}><ContactIcon platform="email" />Email me</a>
       </div>
       <div className="contact-details">
-        <h2>GET IN TOUCH</h2>
+        <h2 className="eyebrow">Contact channels</h2>
         <dl className="contact-grid">
           {platforms.map(platform => {
             const external = platform.href && platform.id !== 'email';
-            return <div key={platform.id} className={`contact-platform${platform.id === 'linkedin' ? ' is-unavailable' : ''}`}>
+            return <div key={platform.id} className="contact-platform">
               <dt><ContactIcon platform={platform.id} />{platform.label}</dt>
-              <dd>{platform.href ? <a href={platform.href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{platform.value}{external && <span className="sr-only"> (opens in a new tab)</span>}</a> : <span className={platform.id === 'linkedin' ? 'coming-soon' : 'contact-username'}>{platform.value}</span>}</dd>
+              <dd>{platform.href ? <a href={platform.href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{platform.value}{external && <span className="sr-only"> (opens in a new tab)</span>}</a> : platform.value}</dd>
             </div>;
           })}
         </dl>

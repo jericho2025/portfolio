@@ -1,23 +1,73 @@
 import { Link } from 'react-router-dom';
 
+const projects = [
+  {
+    title: 'WISDOM',
+    category: 'Collaborative capstone',
+    description: 'Sales and inventory management for Spiral Wood Services, with furniture customization and an interactive 3D blueprint editor.',
+    image: '/images/projects/wisdom-preview.png',
+    alt: 'WISDOM homepage and furniture customization interface',
+    dimensions: [1440, 900],
+    tags: ['React', 'Node.js', 'Express', 'MySQL', 'Three.js'],
+    route: '/portfolio/wisdom',
+    action: 'Explore project',
+    externalUrl: 'https://spiralwoodservice.com/',
+    externalLabel: 'Live website',
+  },
+  {
+    title: 'Personal Developer Portfolio & Interactive Arcade',
+    category: 'Personal full-stack project',
+    description: 'A responsive portfolio with light and dark themes, live GitHub data, and six browser games with local scores and progress.',
+    image: '/images/projects/arcade-preview.webp',
+    alt: 'Dino Runner in the portfolio arcade, showing the jump stage and score controls',
+    dimensions: [746, 466],
+    tags: ['React', 'Vite', 'JavaScript', 'CSS', 'Node.js', 'Express'],
+    route: '/arcade',
+    action: 'Open Arcade',
+    externalUrl: 'https://github.com/jericho2025/portfolio',
+    externalLabel: 'Source on GitHub',
+  },
+];
+
+export const projectCount = projects.length;
+
+function ProjectCard({ project, heading: Heading }) {
+  const [width, height] = project.dimensions;
+
+  return (
+    <article className="project-preview">
+      <Link className="project-image-link" to={project.route} aria-label={project.action + ': ' + project.title}>
+        <img className="project-preview-image" src={project.image} alt={project.alt} width={width} height={height} loading="lazy" decoding="async" />
+      </Link>
+      <div className="project-card-content">
+        <p className="eyebrow">{project.category}</p>
+        <Heading>{project.title}</Heading>
+        <p>{project.description}</p>
+        <ul className="tags" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+        <div className="project-card-actions">
+          <Link className="primary-link" to={project.route}>{project.action}<span aria-hidden="true">→</span></Link>
+          <a className="project-live-link text-link" href={project.externalUrl} target="_blank" rel="noopener noreferrer">
+            {project.externalLabel} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function ProjectShowcase({ heading = 'h3' }) {
+  return (
+    <div className="portfolio-grid">
+      {projects.map(project => <ProjectCard key={project.route} project={project} heading={heading} />)}
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section className="page-content portfolio-page" aria-labelledby="portfolio-title">
-      <div className="page-heading"><h1 id="portfolio-title">Portfolio</h1><p>Collaborative full-stack project work.</p></div>
-      <div className="portfolio-grid">
-        <article className="project-preview"><Link to="/portfolio/wisdom">
-          <img className="project-preview-image" src="/images/projects/wisdom-preview.png" alt="WISDOM public homepage showing the Spiral Wood Services header and furniture customization interface" width="1440" height="900" />
-        </Link>
-          <h2>WISDOM</h2>
-          <h3 className="project-card-title">Web-Based Sales &amp; Inventory with Digital Blueprint for Spiral Wood Services</h3>
-          <p className="project-card-subtitle">Full-Stack Web Application · Collaborative Development</p>
-          <p className="project-card-description">A web-based business management system developed for Spiral Wood Services, featuring sales and inventory management, furniture customization, and an interactive 3D blueprint editor.</p>
-          <div className="project-card-actions">
-            <Link className="project-explore-link" to="/portfolio/wisdom">Explore Project <span aria-hidden="true">→</span></Link>
-            <a className="project-live-link" href="https://spiralwoodservice.com/" target="_blank" rel="noopener noreferrer">Live Website <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-          </div>
-        </article>
-      </div>
+      <div className="page-heading"><h1 id="portfolio-title">Projects</h1><p>Collaborative and personal full-stack projects.</p></div>
+      <ProjectShowcase heading="h2" />
     </section>
   );
 }
