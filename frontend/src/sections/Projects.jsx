@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import AquaBlessArtwork from '../components/AquaBlessArtwork.jsx';
 
 export const projects = [
   {
@@ -13,6 +14,20 @@ export const projects = [
     action: 'Explore project',
     externalUrl: 'https://spiralwoodservice.com/',
     externalLabel: 'Live website',
+  },
+  {
+    title: 'AquaBless Water Ordering & Delivery System',
+    category: 'Collaborative academic case study',
+    description: 'A PHP and MySQL water ordering platform with customer, admin, operator, and rider workflows, deployed with Docker and MariaDB on Railway.',
+    image: null,
+    alt: 'AquaBless water ordering and delivery project preview',
+    dimensions: [960, 540],
+    tags: ['PHP', 'MySQL', 'MariaDB', 'JavaScript', 'Docker', 'Railway'],
+    route: '/portfolio/aquabless',
+    action: 'Explore project',
+    externalUrl: 'https://aquabless-web-production.up.railway.app/',
+    externalLabel: 'Live demo',
+    preview: 'aquabless',
   },
   {
     title: 'Personal Developer Portfolio & Interactive Arcade',
@@ -37,7 +52,7 @@ function ProjectCard({ project, heading: Heading }) {
   return (
     <article className="project-preview">
       <Link className="project-image-link" to={project.route} aria-label={project.action + ': ' + project.title}>
-        <img className="project-preview-image" src={project.image} alt={project.alt} width={width} height={height} loading="lazy" decoding="async" />
+        {project.preview === 'aquabless' ? <AquaBlessArtwork compact /> : <img className="project-preview-image" src={project.image} alt={project.alt} width={width} height={height} loading="lazy" decoding="async" />}
       </Link>
       <div className="project-card-content">
         <p className="eyebrow">{project.category}</p>

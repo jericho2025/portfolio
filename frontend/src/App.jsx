@@ -9,6 +9,7 @@ import Contact from './sections/Contact.jsx';
 import { useTheme } from './hooks/useTheme.js';
 const About = lazy(() => import('./sections/About.jsx'));
 const ProjectDetails = lazy(() => import('./sections/ProjectDetails.jsx'));
+const AquaBlessProject = lazy(() => import('./sections/AquaBlessProject.jsx'));
 const Github = lazy(() => import('./sections/Github.jsx'));
 const Services = lazy(() => import('./sections/Services.jsx'));
 const Arcade = lazy(() => import('./sections/Arcade.jsx'));
@@ -21,8 +22,9 @@ const homeMetadata = {
 const routeMetadata = {
   '/': homeMetadata,
   '/about': { title: 'About & Journey', description: 'Learn about Jericho M. Flores, his information technology education, professional development, and technical skills.' },
-  '/portfolio': { title: 'Projects', description: 'Explore WISDOM, a collaborative capstone, and the Personal Developer Portfolio & Interactive Arcade by Jericho M. Flores.' },
+  '/portfolio': { title: 'Projects', description: 'Explore WISDOM, AquaBless Water Ordering and Delivery System, and the Personal Developer Portfolio & Interactive Arcade by Jericho M. Flores.' },
   '/portfolio/wisdom': { title: 'WISDOM', description: 'Explore the collaborative WISDOM capstone for furniture sales, inventory, and customization, including eight feature walkthroughs.' },
+  '/portfolio/aquabless': { title: 'AquaBless', description: 'Explore the PHP and MySQL AquaBless Water Ordering and Delivery System case study, its role-based workflows, and live Railway demo.' },
   '/services': { title: 'Services', description: 'See the web development services offered by Jericho M. Flores.' },
   '/github': { title: 'GitHub', description: 'Browse the latest public GitHub repositories from Jericho M. Flores.' },
   '/arcade': { title: 'Activity Arcade', description: 'Play six interactive browser games and track your scores and progress locally.' },
@@ -67,6 +69,7 @@ function PortfolioApp() {
             <Route path="/about" element={<About />} />
             <Route path="/portfolio" element={<Projects />} />
             <Route path="/portfolio/wisdom" element={<ProjectDetails />} />
+            <Route path="/portfolio/aquabless" element={<AquaBlessProject />} />
             <Route path="/services" element={<Services />} />
             <Route path="/github" element={<Github />} />
             <Route path="/arcade" element={<Arcade />} />
