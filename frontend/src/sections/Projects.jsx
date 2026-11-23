@@ -18,8 +18,8 @@ export const projects = [
   {
     title: 'AquaBless Water Ordering & Delivery System',
     shortTitle: 'AquaBless',
-    category: 'Real client · Sole developer',
-    description: 'Independently developed for AquaBless Purified Water: a PHP and MySQL system replacing handwritten water order logs with customer ordering, payment review, rider assignments and delivery records.',
+    category: 'Client-based academic project',
+    description: 'A PHP and MySQL web system for AquaBless Purified Water that manages water orders, payments, rider assignments, and deliveries.',
     image: null,
     alt: 'AquaBless water ordering and delivery project preview',
     dimensions: [960, 540],
