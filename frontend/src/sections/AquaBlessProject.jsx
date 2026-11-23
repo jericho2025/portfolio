@@ -5,8 +5,8 @@ const liveUrl = 'https://aquabless-web-production.up.railway.app/';
 
 const facts = [
   ['Client', 'AquaBless Purified Water'],
-  ['Project', 'Client-based academic case study'],
-  ['Team', '4 student developers'],
+  ['Development', 'Sole developer — Jericho M. Flores'],
+  ['Academic documentation', '4 listed proponents'],
   ['Documented', 'November 2025'],
 ];
 
@@ -48,7 +48,7 @@ export default function AquaBlessProject() {
     <article className="page-content project-page aquabless-project-page" aria-labelledby="aquabless-title">
       <Link className="text-link back-link" to="/portfolio">← Back to portfolio</Link>
       <header className="project-heading aquabless-client-heading">
-        <p className="eyebrow">Real business client · Collaborative academic project</p>
+        <p className="eyebrow">Real business client · Sole developer · Academic case study</p>
         <h1 id="aquabless-title">AquaBless</h1>
         <p>Water Ordering and Delivery System (AWODS)</p>
       </header>
@@ -59,7 +59,7 @@ export default function AquaBlessProject() {
           <p className="eyebrow">Built for AquaBless Purified Water</p>
           <h2>From handwritten order logs to a connected delivery workflow.</h2>
           <p>AquaBless Purified Water is a real water-refilling business. Its ordering process relied on text messages, calls, Facebook Messenger, dealers and handwritten paper records—making it harder for staff, riders and customers to keep order information aligned.</p>
-          <p>Our four-member student team developed AWODS as a client-based case study to organize ordering, payment checks, rider assignments and delivery records in one web application.</p>
+          <p>I independently developed AWODS for AquaBless Purified Water, implementing the web application to organize ordering, payment checks, rider assignments and delivery records. The academic case study documentation lists four student proponents, but I was the sole developer of the system.</p>
           <a className="primary-link" href={liveUrl} target="_blank" rel="noopener noreferrer">Open live website <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
           <p className="aquabless-demo-note">The public deployment uses case-study sample data. Some pages require an account or an authorized role. The source code is maintained in a private repository.</p>
         </div>
@@ -69,6 +69,12 @@ export default function AquaBlessProject() {
         {facts.map(([label, value]) => (
           <div key={label}><span>{label}</span><strong>{value}</strong></div>
         ))}
+      </section>
+
+      <section className="aquabless-detail-section" aria-labelledby="aquabless-role-title">
+        <p className="eyebrow">My role · Sole developer</p>
+        <h2 id="aquabless-role-title">Independently built the AWODS application</h2>
+        <p className="aquabless-section-copy">I was responsible for the development of the system, including the PHP-based web interfaces, customer and staff workflows, and MySQL database integration. The case study was prepared by a four-member academic group; the application development was my individual contribution.</p>
       </section>
 
       <section className="aquabless-detail-section" aria-labelledby="aquabless-problem-title">
