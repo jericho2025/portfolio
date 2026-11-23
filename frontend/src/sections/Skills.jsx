@@ -8,6 +8,7 @@ const brandIcons = {
   'JavaScript': 'javascript',
   'TypeScript': 'typescript',
   'React.js': 'react',
+  'Next.js': 'nextjs',
   'React Router': 'reactrouter',
   'Tailwind CSS': 'tailwindcss',
   'Bootstrap': 'bootstrap',
@@ -16,6 +17,7 @@ const brandIcons = {
   'PHP': 'php',
   'MongoDB': 'mongodb',
   'MySQL / SQL': 'mysql',
+  'Supabase Database': 'supabase',
   'Python': 'python',
   'C#': 'csharp',
   'Java': 'java',
@@ -25,6 +27,8 @@ const brandIcons = {
   'Visual Studio Code': 'vscode',
   'Vite': 'vitejs',
   'Postman': 'postman',
+  'Vercel': 'vercel',
+  'Cloudflare': 'cloudflare',
 };
 
 const conceptualIcons = {
@@ -37,13 +41,14 @@ const conceptualIcons = {
   'Debugging & Testing': ['✓', '#15803d'],
   'System Documentation': ['D', '#b45309'],
   'AI-assisted Development': ['AI', '#7c3aed'],
+  'XAMPP': ['X', '#f37626'],
 };
 
 function SkillIcon({ name }) {
   const icon = brandIcons[name];
   if (icon) {
     return (
-      <svg className={icon === 'github' || icon === 'express' ? 'skill-icon skill-logo-dark' : 'skill-icon'} viewBox="0 0 128 128" focusable="false" aria-hidden="true">
+      <svg className={['github', 'express', 'vercel', 'nextjs'].includes(icon) ? 'skill-icon skill-logo-dark' : 'skill-icon'} viewBox="0 0 128 128" focusable="false" aria-hidden="true">
         <use href={`/icons/skill-sprite.svg#${icon}`} />
       </svg>
     );

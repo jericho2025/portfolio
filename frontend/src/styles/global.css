@@ -290,24 +290,26 @@ body { background: var(--page); color: var(--text); transition: background-color
 .footer { border-top: 1px solid var(--line); }
 
 .home-page {
-  --hero-dot: rgb(25 25 25 / .14);
+  /* Wide, low-contrast micro-dot field inspired by the reference's editorial hero.
+     Decorative only: fades across the left portrait and right typography, without an image asset. */
+  --hero-dot: rgb(25 25 25 / .125);
   position: relative;
   isolation: isolate;
   padding-block: clamp(44px, 5vw, 84px) 70px;
 }
 
-:root[data-theme='dark'] .home-page { --hero-dot: rgb(255 255 255 / .15); }
+:root[data-theme='dark'] .home-page { --hero-dot: rgb(255 255 255 / .13); }
 
 .home-page::before {
   content: '';
   position: absolute;
-  inset: 0 0 auto;
-  height: clamp(360px, 42vw, 610px);
+  inset: -22px -8vw auto -10vw;
+  height: clamp(440px, 46vw, 680px);
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, var(--hero-dot) .7px, transparent 1.15px);
-  background-size: 10px 10px;
-  mask-image: radial-gradient(ellipse 47% 78% at 62% 10%, #000 8%, rgb(0 0 0 / .7) 37%, transparent 78%);
+  background-image: radial-gradient(circle, var(--hero-dot) .75px, transparent 1.2px);
+  background-size: 11px 11px;
+  mask-image: radial-gradient(ellipse 77% 76% at 54% 2%, #000 4%, rgb(0 0 0 / .74) 40%, transparent 90%);
 }
 .home-layout { display: grid; grid-template-columns: clamp(206px, 18.7vw, 335px) minmax(0, 1fr); align-items: center; gap: clamp(28px, 3.45vw, 61px); }
 .home-portrait, .about-portrait { overflow: hidden; border: 1px solid var(--line); border-radius: 19px; background: var(--card); box-shadow: 0 14px 28px rgb(0 0 0 / .11); }

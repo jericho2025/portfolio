@@ -1,7 +1,9 @@
+// All entries are explicitly approved by the portfolio owner.
+// AI workflow tool names are displayed separately in Hero.jsx and do not affect this count.
 export const skillGroups = [
   {
     title: 'Frontend Development',
-    skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React.js', 'React Router', 'Tailwind CSS', 'Bootstrap', 'Responsive Web Design'],
+    skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'React Router', 'Tailwind CSS', 'Bootstrap', 'Responsive Web Design'],
   },
   {
     title: 'Backend Development',
@@ -9,7 +11,7 @@ export const skillGroups = [
   },
   {
     title: 'Databases',
-    skills: ['MongoDB', 'MySQL / SQL'],
+    skills: ['MongoDB', 'MySQL / SQL', 'Supabase Database'],
   },
   {
     title: 'Other Programming Languages',
@@ -21,12 +23,13 @@ export const skillGroups = [
   },
   {
     title: 'Development Tools & Workflow',
-    skills: ['Git', 'GitHub', 'Visual Studio Code', 'Vite', 'Postman', 'Render / Web Deployment', 'Debugging & Testing', 'System Documentation', 'AI-assisted Development'],
+    skills: ['Git', 'GitHub', 'Visual Studio Code', 'Vite', 'Postman', 'Render / Web Deployment', 'Vercel', 'Cloudflare', 'XAMPP', 'Debugging & Testing', 'System Documentation', 'AI-assisted Development'],
   },
 ];
 
 export const featuredSkills = [
-  'React.js', 'JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'MySQL / SQL', 'Git', 'Figma',
+  'React.js', 'Next.js', 'JavaScript', 'Node.js', 'Express.js',
+  'MongoDB', 'Supabase Database', 'MySQL / SQL', 'Vercel', 'Cloudflare',
 ];
 
 export const skillCount = skillGroups.reduce((total, group) => total + group.skills.length, 0);
