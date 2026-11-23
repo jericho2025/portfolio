@@ -19,7 +19,7 @@ export const skillGroups = [
   },
   {
     title: 'UI/UX & Specialized Development',
-    skills: ['Figma', 'UI/UX Design', '3D Web Interfaces'],
+    skills: ['Figma', 'Canva', 'UI/UX Design', '3D Web Interfaces'],
   },
   {
     title: 'Mobile Development',
