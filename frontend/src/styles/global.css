@@ -740,31 +740,3 @@ html.search-dialog-open { overflow: hidden; }
 @media (max-width: 420px) {
   .aquabless-process-list { grid-template-columns: 1fr; }
 }
-
-
-/* Real AquaBless case-study screenshots: nine screens in one lightweight AVIF image. */
-.aquabless-feature-showcase { margin-top: clamp(32px, 5vw, 58px); }
-.aquabless-feature-showcase .feature-selector { margin-top: 20px; }
-.awods-screenshot-figure { margin: 0; }
-.awods-screenshot {
-  display: block;
-  width: 100%;
-  max-width: 900px;
-  aspect-ratio: 50 / 31;
-  border: 1px solid var(--line);
-  background-color: #e5f5fc;
-  background-image: url('/images/projects/aquabless-feature-screens.avif');
-  background-repeat: no-repeat;
-  background-size: 300% 300%;
-  background-position: 0 0;
-}
-.awods-screenshot-figure figcaption {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-@media (max-width: 600px) {
-  .aquabless-feature-showcase { margin-top: 30px; }
-  .awods-screenshot-figure figcaption { font-size: 11px; }
-}
