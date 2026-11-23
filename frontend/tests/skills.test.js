@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
 import { skillCount, skillGroups, featuredSkills } from '../src/data/skills.js';
 
 const approvedSkills = [
@@ -224,4 +225,38 @@ test('only WISDOM and AquaBless are shown as Projects; Arcade remains a standalo
   assert.match(hero, /\[arcadeGames\.length, 'Arcade games'\]/);
   assert.match(app, /Route path="\/arcade"/);
   assert.doesNotMatch(app, /and the Personal Developer Portfolio & Interactive Arcade/);
+});
+
+test('default light theme ignores system preference while saved theme choices remain respected', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const hook = readFileSync(new URL('../src/hooks/useTheme.js', import.meta.url), 'utf8');
+  const bootstrap = html.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(bootstrap, 'Expected inline early theme initialization');
+
+  function loadTheme(savedTheme, storageFailure = false) {
+    const document = {
+      documentElement: { dataset: {} },
+      getElementById() { return { media: 'not all' }; },
+    };
+    const localStorage = {
+      getItem() {
+        if (storageFailure) throw Error('Storage denied');
+        return savedTheme;
+      },
+    };
+    runInNewContext(bootstrap, {
+      document,
+      localStorage,
+      location: { pathname: '/' },
+      matchMedia: () => ({ matches: true }),
+    });
+    return document.documentElement.dataset.theme;
+  }
+
+  assert.equal(loadTheme(null), 'light');
+  assert.equal(loadTheme('unexpected-value'), 'light');
+  assert.equal(loadTheme('light'), 'light');
+  assert.equal(loadTheme('dark'), 'dark');
+  assert.equal(loadTheme(null, true), 'light');
+  assert.match(hook, /localStorage\.setItem\('portfolio-theme', theme\)/);
 });
