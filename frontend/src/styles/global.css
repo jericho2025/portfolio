@@ -504,3 +504,61 @@ html.search-dialog-open { overflow: hidden; }
 @media (max-width: 420px) {
   .search-results li { align-items: flex-start; flex-direction: column; gap: 3px; }
 }
+
+
+/* V3: Full-color technology logos for the home preview and complete Tech Stack. */
+.skill-tile {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 5px 9px;
+  background: var(--bg);
+}
+.skill-tile > span:last-child { min-width: 0; }
+.skill-icon {
+  display: inline-block;
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  vertical-align: middle;
+}
+.skill-concept-icon {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--skill-color) 13%, transparent);
+  color: var(--skill-color);
+  font: 800 9px/1 var(--mono);
+}
+:root[data-theme='dark'] .skill-logo-dark { filter: invert(1); }
+
+/* Approximate online browser sessions: refreshed by an anonymous heartbeat. */
+.online-presence {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding: 9px 10px 6px;
+  min-height: 37px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+}
+.presence-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #23b673;
+  box-shadow: 0 0 0 3px rgb(35 182 115 / .10);
+}
+.presence-dot.is-unavailable {
+  background: var(--muted);
+  box-shadow: none;
+  opacity: .55;
+}
+.online-presence + .nav-actions { margin-top: 0; }
+@media (max-width: 900px) {
+  .online-presence { padding-block: 11px; min-height: 44px; }
+}
