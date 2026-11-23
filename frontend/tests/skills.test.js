@@ -148,3 +148,30 @@ test('homepage includes every approved skill and project cards keep complete des
   assert.match(projects, /externalLabel: 'Live website'/);
   assert.match(aqua, /Open live website/);
 });
+
+
+test('AquaBless accurately presents the documented real client and avoids claiming unsupported features', () => {
+  const detail = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
+  for (const term of [
+    'AquaBless Purified Water',
+    'four-member student team',
+    'Facebook Messenger',
+    'GCash',
+    'Customer experience',
+    'Operations',
+    'Rider workflows',
+    'Administration',
+    'From order to delivery',
+    'Database design',
+    '3NF',
+    'full inventory management',
+    'live GPS tracking',
+    'Open live website',
+  ]) assert.ok(detail.includes(term), 'Missing client case-study context: ' + term);
+  assert.match(projects, /Real client · Academic team project/);
+  assert.match(projects, /handwritten water order logs/);
+  assert.match(app, /AquaBless \| Real Client Case Study/);
+  assert.doesNotMatch(detail, /paid freelance contract|real-time GPS tracking available/i);
+});
