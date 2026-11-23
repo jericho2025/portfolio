@@ -39,22 +39,24 @@ const approvedSkills = [
   "Vercel",
   "Cloudflare",
   "XAMPP",
-  "Next.js"
+  "Next.js",
+  "FlutterFlow",
+  "Android SDK"
 ];
 const aiWorkflowTools = ['ChatGPT', 'Claude', 'Cursor', 'Grok', 'Gemini', 'GitHub Copilot'];
 
-test('full Tech Stack matches exactly the 36 user-approved technical skills', () => {
+test('full Tech Stack contains exactly 38 approved technical skills', () => {
   const actual = skillGroups.flatMap(group => group.skills);
-  assert.equal(skillGroups.length, 6);
-  assert.equal(actual.length, 36);
-  assert.equal(skillCount, 36);
+  assert.equal(skillGroups.length, 7);
+  assert.equal(actual.length, 38);
+  assert.equal(skillCount, 38);
   assert.equal(new Set(actual).size, 36);
   assert.deepEqual([...actual].sort(), [...approvedSkills].sort());
   assert.equal(actual.some(skill => aiWorkflowTools.includes(skill)), false);
   assert.equal(featuredSkills.every(skill => actual.includes(skill)), true);
 });
 
-test('all 36 skills render a branded SVG icon or a deliberate conceptual monogram', () => {
+test('all 38 skills render a branded SVG icon or a deliberate conceptual monogram', () => {
   const skillsCode = readFileSync(new URL('../src/sections/Skills.jsx', import.meta.url), 'utf8');
   const sprite = readFileSync(new URL('../public/icons/skill-sprite.svg', import.meta.url), 'utf8');
   const brandPairs = [...skillsCode.matchAll(/^\s*'([^']+)': '([^']+)',?\s*$/gm)];
@@ -64,6 +66,17 @@ test('all 36 skills render a branded SVG icon or a deliberate conceptual monogra
   for (const skill of approvedSkills) {
     assert.ok(icons.has(skill) || concepts.has(skill), 'Missing icon for ' + skill);
     if (icons.has(skill)) assert.ok(symbols.has(icons.get(skill)), 'Missing SVG symbol for ' + skill);
+  }
+});
+
+test('mobile skills are represented without implying Flutter, Dart or Android Studio experience', () => {
+  const mobile = skillGroups.find(group => group.title === 'Mobile Development');
+  assert.ok(mobile);
+  assert.deepEqual(mobile.skills, ['FlutterFlow', 'Android SDK']);
+  assert.ok(featuredSkills.includes('FlutterFlow'));
+  assert.ok(featuredSkills.includes('Android SDK'));
+  for (const notSelected of ['Flutter', 'Dart', 'Android Studio']) {
+    assert.ok(!skillGroups.some(group => group.skills.includes(notSelected)));
   }
 });
 
