@@ -364,16 +364,17 @@ body { background: var(--page); color: var(--text); transition: background-color
 .project-preview-image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); transition: transform .2s ease; }
 .project-image-link:hover img { transform: scale(1.025); }
 .project-card-content { display: flex; flex-direction: column; min-width: 0; min-height: 164px; padding: 12px 14px 12px; }
-.project-card-content h2, .project-card-content h3 { margin: 0; min-width: 0; font-size: 17px; font-weight: 650; letter-spacing: -.025em; line-height: 1.35; }
-.project-card-content > p:not(.eyebrow) { font-size: 13px; line-height: 1.5; }
+.project-card-content h2, .project-card-content h3 { margin: 0; min-width: 0; font-size: 15px; font-weight: 650; letter-spacing: -.025em; line-height: 1.35; }
+.project-card-content > p:not(.eyebrow) { font-size: 12px; line-height: 1.5; }
 .tags { gap: 6px; }
 .tags li { padding: 2px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--page); font-size: 11px; }
+.project-card-category { margin-bottom: 6px; font-size: 9px; font-weight: 600; line-height: 1.4; }
 .project-card-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; min-width: 0; }
 .project-open-link { flex: none; display: grid; place-items: center; width: 36px; height: 36px; margin: -7px -7px -3px 0; border-radius: 7px; color: var(--muted); font-size: 15px; }
 .project-open-link:hover { color: var(--text); background: var(--card); }
-.project-card-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; margin-top: 4px; color: var(--muted); }
-.project-card-bottom { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 6px 10px; margin-top: auto; padding-top: 12px; }
-.project-tech-list { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.project-card-description { margin-top: 6px; color: var(--muted); overflow-wrap: anywhere; }
+.project-card-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; margin-top: auto; padding-top: 8px; }
+.project-tech-list { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; list-style: none; margin: 9px 0 0; padding: 0; }
 .project-tech-list li { border: 1px solid var(--line); border-radius: 5px; padding: 2px 6px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 .project-demo-link { display: inline-flex; gap: 5px; align-items: center; min-height: 34px; color: var(--text); font-size: 11px; font-weight: 600; white-space: nowrap; }
 .project-demo-link:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -685,4 +686,13 @@ html.search-dialog-open { overflow: hidden; }
   .portfolio-stats > div { gap: 8px; padding: 10px 8px; }
   .portfolio-stats dd { font-size: 24px; }
   .portfolio-stats dt { font-size: 9px; }
+}
+
+/* The compact layout must never hide project copy or technical skills. */
+.stack-preview .skill-tiles { gap: 5px 6px; }
+.stack-preview .skill-tile { min-height: 29px; padding: 3px 7px; font-size: 11px; }
+.stack-preview .skill-icon { flex-basis: 17px; width: 17px; height: 17px; }
+@media (max-width: 660px) {
+  .stack-preview .skill-tile { font-size: 12px; }
+  .project-card-content { padding: 13px 14px; }
 }

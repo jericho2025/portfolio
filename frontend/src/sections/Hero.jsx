@@ -4,13 +4,14 @@ import profilePhoto from '../assets/jericho-profile.webp';
 import { ContactIcon, platforms } from './Contact.jsx';
 import { ProjectShowcase, projectCount } from './Projects.jsx';
 import { SkillList } from './Skills.jsx';
-import { featuredSkills, skillCount } from '../data/skills.js';
+import { skillGroups, skillCount } from '../data/skills.js';
 import { wisdomFeatures } from '../data/wisdomFeatures.js';
 
 import { arcadeGames } from '../data/arcadeGames.js';
 import { workflowIcons } from '../data/workflowIcons.js';
 
 const workflowTools = ['ChatGPT', 'Cursor', 'Gemini', 'Grok', 'Claude', 'GitHub Copilot'];
+const allSkills = skillGroups.flatMap(group => group.skills);
 
 function WorkflowTools() {
   return (
@@ -85,10 +86,10 @@ export default function Hero() {
       </section>
       <section className="home-section stack-preview" aria-labelledby="stack-preview-title">
         <div className="section-row">
-          <h2 id="stack-preview-title">Tech Stack</h2>
-          <Link className="text-link" to="/about#skills">View Full Tech Stack <span aria-hidden="true">→</span></Link>
+          <h2 id="stack-preview-title">Tech Stack · {skillCount} Skills</h2>
+          <Link className="text-link" to="/about#skills">View Skills by Category <span aria-hidden="true">→</span></Link>
         </div>
-        <SkillList skills={featuredSkills} label="Selected technical skills" />
+        <SkillList skills={allSkills} label="All 39 technical skills" />
       </section>
       <section id="availability" className="availability-panel" aria-labelledby="availability-title" tabIndex={-1}>
         <div className="availability-copy">

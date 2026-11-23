@@ -130,3 +130,21 @@ test('reference-inspired portfolio layout keeps compact three-column project car
   assert.match(projects, /shortTitle: 'AquaBless'/);
   assert.match(hero, /all \{projectCount\}/);
 });
+
+
+test('homepage includes every approved skill and project cards keep complete descriptions and technology lists', () => {
+  const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
+  const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
+  const styles = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  const aqua = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
+  assert.match(hero, /skillGroups\.flatMap\(group => group\.skills\)/);
+  assert.match(hero, /<SkillList skills=\{allSkills\} label="All 39 technical skills"/);
+  assert.match(projects, /project\.tags\.map\(tag =>/);
+  assert.doesNotMatch(projects, /project\.tags\.slice\(/);
+  assert.match(projects, /project-card-category/);
+  assert.match(projects, /<Heading>\{project\.title\}<\/Heading>/);
+  assert.match(styles, /\.portfolio-grid \{[^\n]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(styles, /-webkit-line-clamp/);
+  assert.match(projects, /externalLabel: 'Live website'/);
+  assert.match(aqua, /Open live website/);
+});

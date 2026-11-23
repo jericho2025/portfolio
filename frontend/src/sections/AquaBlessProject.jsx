@@ -43,8 +43,8 @@ export default function AquaBlessProject() {
           <h2>Project overview</h2>
           <p>AquaBless is a PHP and MySQL-based web application built around the workflow of a water ordering and delivery business. It brings customer ordering, operational management, rider coordination, and administration into a role-based system.</p>
           <p>The application was originally developed for a local XAMPP environment and was later deployed online using Docker on Railway, with a separate MariaDB service.</p>
-          <a className="primary-link" href={liveUrl} target="_blank" rel="noopener noreferrer">Open live demo <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-          <p className="aquabless-demo-note">Demonstration deployment with sample data. Some screens require an account or an authorized role. The source repository is private.</p>
+          <a className="primary-link" href={liveUrl} target="_blank" rel="noopener noreferrer">Open live website <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+          <p className="aquabless-demo-note">Live web application using sample case-study data. Some screens require an account or an authorized role. The source repository is private.</p>
         </div>
       </div>
       <section className="aquabless-detail-section" aria-labelledby="aquabless-modules-title">
