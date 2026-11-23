@@ -29,6 +29,7 @@ const brandIcons = {
   'Postman': 'postman',
   'Vercel': 'vercel',
   'Cloudflare': 'cloudflare',
+  'Android SDK': 'android',
 };
 
 const conceptualIcons = {
@@ -42,6 +43,8 @@ const conceptualIcons = {
   'System Documentation': ['D', '#b45309'],
   'AI-assisted Development': ['AI', '#7c3aed'],
   'XAMPP': ['X', '#f37626'],
+  // A FlutterFlow-inspired monogram, not an official Flutter or FlutterFlow logo.
+  'FlutterFlow': ['FF', '#3b82f6'],
 };
 
 function SkillIcon({ name }) {
