@@ -169,3 +169,22 @@ test('AquaBless follows WISDOM-style project-first copy and keeps one clear deve
   assert.doesNotMatch(projects, /Sole developer|Independently developed/);
   assert.match(app, /AquaBless Water Ordering and Delivery System/);
 });
+
+
+test('AquaBless has nine real case-study screenshot previews with working local assets', () => {
+  const gallery = readFileSync(new URL('../src/components/AquaBlessFeatureShowcase.jsx', import.meta.url), 'utf8');
+  const page = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  const sprite = readFileSync(new URL('../public/images/projects/aquabless-feature-screens.avif', import.meta.url));
+  assert.equal(sprite.subarray(4, 12).toString(), 'ftypavif');
+  assert.ok(sprite.length > 5000);
+  for (const id of ['login', 'products', 'cart', 'checkout', 'records', 'orders', 'dashboard', 'inventory', 'payments']) {
+    assert.ok(gallery.includes("id: '" + id + "'"), 'Missing screenshot for ' + id);
+  }
+  assert.match(gallery, /aria-pressed=\{screen\.id === selected\.id\}/);
+  assert.match(gallery, /Selected feature: \{selected\.name\}/);
+  assert.match(page, /<AquaBlessFeatureShowcase \/>/);
+  assert.match(gallery, /Feature Previews/);
+  assert.match(css, /aquabless-feature-screens\.avif/);
+  assert.match(css, /background-size: 300% 300%/);
+});
