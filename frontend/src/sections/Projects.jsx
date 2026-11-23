@@ -28,20 +28,6 @@ export const projects = [
     externalUrl: 'https://aquabless-web-production.up.railway.app/',
     externalLabel: 'Live website',
   },
-  {
-    title: 'Personal Developer Portfolio & Interactive Arcade',
-    shortTitle: 'Portfolio & Interactive Arcade',
-    category: 'Personal full-stack project',
-    description: 'A responsive portfolio with light and dark themes, live GitHub data, and six browser games with local scores and progress.',
-    image: '/images/projects/arcade-preview.webp',
-    alt: 'Dino Runner in the portfolio arcade, showing the jump stage and score controls',
-    dimensions: [746, 466],
-    tags: ['React', 'Vite', 'JavaScript', 'CSS', 'Node.js', 'Express'],
-    route: '/arcade',
-    action: 'Open Arcade',
-    externalUrl: 'https://github.com/jericho2025/portfolio',
-    externalLabel: 'Source on GitHub',
-  },
 ];
 
 export const projectCount = projects.length;
@@ -86,7 +72,7 @@ export function ProjectShowcase({ heading = 'h3' }) {
 export default function Projects() {
   return (
     <section className="page-content portfolio-page" aria-labelledby="portfolio-title">
-      <div className="page-heading"><h1 id="portfolio-title">Projects</h1><p>Collaborative and personal full-stack projects.</p></div>
+      <div className="page-heading"><h1 id="portfolio-title">Projects</h1><p>Selected web applications built for real business workflows.</p></div>
       <ProjectShowcase heading="h2" />
     </section>
   );
