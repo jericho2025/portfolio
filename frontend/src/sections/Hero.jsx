@@ -4,14 +4,14 @@ import profilePhoto from '../assets/jericho-profile.webp';
 import { ContactIcon, platforms } from './Contact.jsx';
 import { ProjectShowcase, projectCount } from './Projects.jsx';
 import { SkillList } from './Skills.jsx';
-import { skillGroups, skillCount } from '../data/skills.js';
+import { featuredSkills, skillCount } from '../data/skills.js';
 import { wisdomFeatures } from '../data/wisdomFeatures.js';
 
 import { arcadeGames } from '../data/arcadeGames.js';
 import { workflowIcons } from '../data/workflowIcons.js';
 
 const workflowTools = ['ChatGPT', 'Cursor', 'Gemini', 'Grok', 'Claude', 'GitHub Copilot'];
-const allSkills = skillGroups.flatMap(group => group.skills);
+const remainingSkills = skillCount - featuredSkills.length;
 
 function WorkflowTools() {
   return (
@@ -35,7 +35,7 @@ function WorkflowTools() {
 
 export default function Hero() {
   const stats = [
-    [projectCount, 'Featured projects'],
+    [projectCount, 'Projects'],
     [arcadeGames.length, 'Arcade games'],
     [skillCount, 'Technical skills'],
     [wisdomFeatures.length, 'WISDOM feature walkthroughs'],
@@ -46,7 +46,7 @@ export default function Hero() {
       <section className="home-layout" aria-labelledby="home-title">
         <div className="home-portrait"><img src={profilePhoto} alt="Jericho M. Flores in formal attire" width="1230" height="1278" fetchPriority="high" /></div>
         <div className="home-introduction">
-          <p className="eyebrow home-meta"><span>Aspiring Full-Stack Web Developer</span><span>Marilao, Bulacan, Philippines</span></p>
+          <p className="eyebrow home-meta"><span>WEB AND MOBILE DEVELOPER</span><span>Marilao, Bulacan, Philippines</span></p>
           <h1 id="home-title">Jericho M. Flores</h1>
           <p>I build responsive interfaces with React and JavaScript, and the APIs behind them with Node.js and Express.</p>
           <p>On WISDOM, a collaborative capstone for Spiral Wood Services, I contributed to the frontend, backend APIs, and an interactive 3D blueprint editor.</p>
@@ -68,15 +68,6 @@ export default function Hero() {
           </ul>
         </div>
       </section>
-      <section id="featured" className="home-section highlights-section" aria-labelledby="featured-title" tabIndex={-1}>
-        <h2 id="featured-title" className="eyebrow">Selected highlights</h2>
-        <div className="highlight-grid">
-          <Link to="/portfolio/wisdom"><strong>WISDOM</strong><span>Capstone</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
-          <Link to="/arcade"><strong>Portfolio &amp; Interactive Arcade</strong><span>Personal project</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
-          <Link to="/portfolio/aquabless"><strong>AquaBless</strong><span>Water ordering system</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
-          <Link to="/about#journey"><strong>Pambayang Dalubhasaan ng Marilao</strong><span>Information Technology</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
-        </div>
-      </section>
       <section className="home-section" aria-label="Portfolio at a glance">
         <dl className="portfolio-stats">{stats.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </section>
@@ -86,14 +77,14 @@ export default function Hero() {
       </section>
       <section className="home-section stack-preview" aria-labelledby="stack-preview-title">
         <div className="section-row">
-          <h2 id="stack-preview-title">Tech Stack · {skillCount} Skills</h2>
+          <h2 id="stack-preview-title"><span aria-hidden="true">02 · </span>Tech Stack · {skillCount} Skills</h2>
           <Link className="text-link" to="/about#skills">View Skills by Category <span aria-hidden="true">→</span></Link>
         </div>
-        <SkillList skills={allSkills} label="All 39 technical skills" />
+        <SkillList skills={featuredSkills} label={`${featuredSkills.length} selected technical skills, ${remainingSkills} more available`} moreCount={remainingSkills} moreHref="/about#skills" />
       </section>
       <section id="availability" className="availability-panel" aria-labelledby="availability-title" tabIndex={-1}>
         <div className="availability-copy">
-          <p className="eyebrow">Availability</p>
+          <p className="eyebrow">03 · Availability</p>
           <h2 id="availability-title"><span className="availability-indicator" aria-hidden="true" />Open to Opportunities</h2>
           <p className="availability-description">I'm currently open to entry-level web development opportunities, freelance projects, and meaningful collaborations. I'm interested in building practical digital solutions and growing alongside talented development teams.</p>
           <ul className="tags" aria-label="Opportunity categories">

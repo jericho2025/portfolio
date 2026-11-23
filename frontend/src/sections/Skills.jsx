@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { skillGroupId, skillGroups } from '../data/skills.js';
 
 // Colorful product logos are bundled locally from Devicon (MIT).
@@ -61,10 +62,11 @@ function SkillIcon({ name }) {
   return <span aria-hidden="true" className="skill-icon skill-concept-icon" style={{ '--skill-color': color }}>{mark}</span>;
 }
 
-export function SkillList({ skills, label }) {
+export function SkillList({ skills, label, moreCount = 0, moreHref = "/about#skills" }) {
   return (
     <ul className="skill-tiles" aria-label={label}>
       {skills.map(skill => <li className="skill-tile" key={skill}><SkillIcon name={skill} /><span>{skill}</span></li>)}
+      {moreCount > 0 && <li className="skill-more-item"><Link className="skill-more-link" to={moreHref} aria-label={`View ${moreCount} more technical skills`}>+{moreCount} more</Link></li>}
     </ul>
   );
 }

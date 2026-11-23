@@ -109,7 +109,7 @@ test('AquaBless is discoverable as a deployed case study without exposing its pr
   assert.match(projects, /aquabless-web-production\.up\.railway\.app/);
   assert.match(app, /Route path="\/portfolio\/aquabless"/);
   assert.match(app, /'\/portfolio\/aquabless':/);
-  assert.match(hero, /to="\/portfolio\/aquabless"/);
+  assert.match(hero, /<ProjectShowcase \/>/);
   assert.match(detail, /Customer/);
   assert.match(detail, /Operator/);
   assert.match(detail, /Rider/);
@@ -130,6 +130,7 @@ test('project layout displays two cards with responsive single-column break', ()
   assert.match(projects, /project-demo-link/);
   assert.match(projects, /shortTitle: 'AquaBless'/);
   assert.match(hero, /all \{projectCount\}/);
+  assert.match(css, /\.portfolio-grid \{[^\n]*max-width: 870px/);
 });
 
 
@@ -138,14 +139,14 @@ test('homepage includes every approved skill and project cards keep complete des
   const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
   const styles = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
   const aqua = readFileSync(new URL('../src/sections/AquaBlessProject.jsx', import.meta.url), 'utf8');
-  assert.match(hero, /skillGroups\.flatMap\(group => group\.skills\)/);
-  assert.match(hero, /<SkillList skills=\{allSkills\} label="All 39 technical skills"/);
+  assert.match(hero, /featuredSkills\.length/);
+  assert.match(hero, /<SkillList skills=\{featuredSkills\}/);
   assert.match(projects, /project\.tags\.map\(tag =>/);
   assert.doesNotMatch(projects, /project\.tags\.slice\(/);
   assert.match(projects, /project-card-category/);
   assert.match(projects, /<Heading>\{project\.title\}<\/Heading>/);
   assert.match(styles, /\.portfolio-grid \{[^\n]*repeat\(2, minmax\(0, 1fr\)\)/);
-  assert.doesNotMatch(styles, /-webkit-line-clamp/);
+  assert.match(styles, /\.home-page \.project-card-description \{[^\n]*-webkit-line-clamp: 2/);
   assert.match(projects, /externalLabel: 'Live website'/);
   assert.match(aqua, /Visit Live Website/);
 });
@@ -206,7 +207,7 @@ test('GitHub stays available as a page without a separate Explore sidebar entry'
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
   const projects = readFileSync(new URL('../src/sections/Projects.jsx', import.meta.url), 'utf8');
   assert.doesNotMatch(navigation, /\['\/github', 'GitHub', 'github'\]/);
-  assert.match(navigation, /\['\/#featured', 'Featured', 'featured'\]/);
+  assert.doesNotMatch(navigation, /\['\/#featured', 'Featured', 'featured'\]/);
   assert.match(navigation, /\['\/arcade', 'Arcade', 'arcade'/);
   assert.match(app, /Route path="\/github"/);
   const contact = readFileSync(new URL('../src/sections/Contact.jsx', import.meta.url), 'utf8');
@@ -259,4 +260,23 @@ test('default light theme ignores system preference while saved theme choices re
   assert.equal(loadTheme('dark'), 'dark');
   assert.equal(loadTheme(null, true), 'light');
   assert.match(hook, /localStorage\.setItem\('portfolio-theme', theme\)/);
+});
+
+test('compact Home uses ordered sections and shows abbreviated technical skills', () => {
+  const hero = readFileSync(new URL('../src/sections/Hero.jsx', import.meta.url), 'utf8');
+  const navigation = readFileSync(new URL('../src/components/Navigation.jsx', import.meta.url), 'utf8');
+  const search = readFileSync(new URL('../src/components/PortfolioSearch.jsx', import.meta.url), 'utf8');
+  const skills = readFileSync(new URL('../src/sections/Skills.jsx', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  assert.match(hero, /WEB AND MOBILE DEVELOPER/);
+  assert.doesNotMatch(hero, /Selected highlights|id="featured"/i);
+  assert.doesNotMatch(navigation, /'Featured', 'featured'/);
+  assert.doesNotMatch(search, /'Selected Highlights'/);
+  const indices = [hero.indexOf('01 · '), hero.indexOf('02 · '), hero.indexOf('03 · ')];
+  assert.ok(indices.every(index => index >= 0));
+  assert.ok(indices[0] < indices[1] && indices[1] < indices[2], 'Section numbering follows display order');
+  assert.match(hero, /moreCount=\{remainingSkills\} moreHref="\/about#skills"/);
+  assert.match(skills, /\+\{moreCount\} more/);
+  assert.match(css, /\.portfolio-grid \{[^\n]*max-width: 870px/);
+  assert.equal(skillCount - featuredSkills.length, 27);
 });

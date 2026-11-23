@@ -10,7 +10,6 @@ import { useLivePresence } from '../hooks/useLivePresence.js';
 
 const groups = [
   { label: 'Explore', links: [
-    ['/#featured', 'Featured', 'featured'],
     ['/arcade', 'Arcade', 'arcade', arcadeGames.length],
   ] },
   { label: 'Portfolio', links: [
@@ -31,7 +30,6 @@ const icons = {
   journey: 'M5 21V3 M5 7h7l3-3h5v7h-5l-3 3H5',
   stack: 'm12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5',
   services: 'm12 3 9 5v8l-9 5-9-5V8z M3 8l9 5 9-5 M12 13v8',
-  featured: 'm12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z',
   arcade: 'M8 8h8a4 4 0 0 1 4 3l1 5a2 2 0 0 1-3 2l-3-2H9l-3 2a2 2 0 0 1-3-2l1-5a4 4 0 0 1 4-3z M8 10v5 M5.5 12.5h5 M16 12h.01 M18 14h.01',
   contact: 'M3 5h18v14H3z m0 1 9 7 9-7',
   theme: 'M20 15a8 8 0 0 1-11-11 8.5 8.5 0 1 0 11 11z',

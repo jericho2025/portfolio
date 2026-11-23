@@ -6,7 +6,6 @@ import { projects } from '../sections/Projects.jsx';
 
 const entries = [
   { title: 'Home', group: 'Page', to: '/' },
-  { title: 'Selected Highlights', group: 'Section', to: '/#featured' },
   { title: 'Projects', group: 'Page', to: '/portfolio' },
   { title: 'About & Journey', group: 'Page', to: '/about#journey', keywords: 'education capstone forum attendance programming' },
   { title: 'Tech Stack', group: 'Section', to: '/about#skills' },
