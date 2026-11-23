@@ -208,7 +208,8 @@ test('GitHub stays available as a page without a separate Explore sidebar entry'
   assert.match(navigation, /\['\/#featured', 'Featured', 'featured'\]/);
   assert.match(navigation, /\['\/arcade', 'Arcade', 'arcade'/);
   assert.match(app, /Route path="\/github"/);
-  assert.match(projects, /https:\/\/github\.com\/jericho2025\/portfolio/);
+  const contact = readFileSync(new URL('../src/sections/Contact.jsx', import.meta.url), 'utf8');
+  assert.match(contact, /https:\/\/github\.com\/jericho2025/);
 });
 
 test('only WISDOM and AquaBless are shown as Projects; Arcade remains a standalone page', () => {
