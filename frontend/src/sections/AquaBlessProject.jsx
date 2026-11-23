@@ -13,19 +13,48 @@ const technologies = [
 const features = [
   {
     title: 'Customer',
-    description: 'Browse water products, add items to the cart, place orders, and check delivery updates.',
+    description: 'Place and track water orders online.',
+    functions: [
+      'Browse water products and manage shopping cart items.',
+      'Choose saved delivery addresses or select a location on the map.',
+      'Pay by cash or GCash, with reference and proof upload for GCash.',
+      'Review order history, details, and notifications.',
+      'Contact customer support through the chat feature.',
+      'Manage profile information, addresses, and password.',
+    ],
   },
   {
     title: 'Operator',
-    description: 'Review orders, check payments, and assign riders.',
+    description: 'Handle customer orders, payments, and rider assignments.',
+    functions: [
+      'Review pending orders, order details, and order reports.',
+      'Verify or reject GCash payments and process cash orders.',
+      'Approve, cancel, and prepare orders.',
+      'Assign riders and handle returned orders or delivery issues.',
+      'View notifications and communicate through chat.',
+    ],
   },
   {
     title: 'Rider',
-    description: 'View assigned orders and update delivery status.',
+    description: 'Manage assigned deliveries and delivery records.',
+    functions: [
+      'View pending, ongoing, delivered, and declined assignments.',
+      'Open assigned orders and start deliveries.',
+      'Confirm cash collection when applicable.',
+      'Update delivery status and provide delivery proof.',
+      'Review delivery records and report delivery issues.',
+    ],
   },
   {
     title: 'Admin',
-    description: 'View sales, manage products and stock, and manage accounts.',
+    description: 'Manage store operations, records, and reporting.',
+    functions: [
+      'Review daily, weekly, and monthly sales summaries.',
+      'Manage products, pricing, stock levels, and product availability.',
+      'Monitor orders, payment records, and sales reports.',
+      'Manage employee and user accounts.',
+      'Review audit logs and use database backup tools.',
+    ],
   },
 ];
 
@@ -35,7 +64,7 @@ export default function AquaBlessProject() {
       <Link className="text-link back-link" to="/portfolio">← Back to portfolio</Link>
       <header className="project-heading">
         <p className="eyebrow">Web Application · Client-Based Academic Project</p>
-        <h1 id="aquabless-title">AquaBless</h1>
+        <h1 id="aquabless-title">AquaBless (AWODS)</h1>
         <p>Water Ordering and Delivery System for AquaBless Purified Water</p>
       </header>
 
@@ -43,7 +72,7 @@ export default function AquaBlessProject() {
         <div className="project-summary">
           <section aria-labelledby="aquabless-overview-title">
             <h2 id="aquabless-overview-title">Project Overview</h2>
-            <p>A web-based system developed for AquaBless Purified Water, a real water-refilling business. It helps customers order water online and helps staff manage orders, payments, rider assignments, and deliveries in one place.</p>
+            <p>A web-based water ordering and delivery system developed for AquaBless Purified Water, a real water-refilling business. It connects customer ordering with payment processing, rider assignments, delivery updates, and business records.</p>
             <p>The system was designed to replace order records kept through calls, text messages, Facebook Messenger, and paper notes.</p>
           </section>
           <section aria-labelledby="aquabless-features-title">
@@ -76,7 +105,7 @@ export default function AquaBlessProject() {
       </div>
 
       <section className="aquabless-detail-section" aria-labelledby="aquabless-modules-title">
-        <p className="eyebrow">System Preview</p>
+        <p className="eyebrow">How the system works</p>
         <h2 id="aquabless-modules-title">System Modules</h2>
         <div className="aquabless-detail-layout">
           <img className="aquabless-landing-preview" src="/images/projects/aquabless-landing.avif" alt="AquaBless website landing page with a water splash and Order Now button" width="960" height="540" loading="lazy" decoding="async" />
@@ -85,6 +114,7 @@ export default function AquaBlessProject() {
               <section key={feature.title} className="aquabless-module">
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
+                <ul className="aquabless-module-functions">{feature.functions.map(item => <li key={item}>{item}</li>)}</ul>
               </section>
             ))}
           </div>
