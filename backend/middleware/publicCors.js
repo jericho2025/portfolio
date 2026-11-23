@@ -10,11 +10,12 @@ export function publicCors(origins = '') {
     if (origin) {
       if (!allowed.has(origin)) return res.status(403).json({ error: 'Origin not allowed.' });
       res.set('Access-Control-Allow-Origin', origin);
-      res.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+      res.set('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS');
+      res.set('Access-Control-Allow-Headers', 'Content-Type');
     }
     if (req.method === 'OPTIONS') {
       const method = req.get('Access-Control-Request-Method');
-      if (method && !['GET', 'HEAD'].includes(method)) return res.status(405).json({ error: 'Method not allowed.' });
+      if (method && !['GET', 'HEAD', 'POST'].includes(method)) return res.status(405).json({ error: 'Method not allowed.' });
       return res.status(204).end();
     }
     next();
