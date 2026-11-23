@@ -22,6 +22,7 @@ const brandIcons = {
   'C#': 'csharp',
   'Java': 'java',
   'Figma': 'figma',
+  'Canva': 'canva',
   'Git': 'git',
   'GitHub': 'github',
   'Visual Studio Code': 'vscode',

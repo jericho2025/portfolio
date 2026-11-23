@@ -24,6 +24,7 @@ const approvedSkills = [
   "C#",
   "Java",
   "Figma",
+  "Canva",
   "UI/UX Design",
   "3D Web Interfaces",
   "Git",
@@ -45,18 +46,18 @@ const approvedSkills = [
 ];
 const aiWorkflowTools = ['ChatGPT', 'Claude', 'Cursor', 'Grok', 'Gemini', 'GitHub Copilot'];
 
-test('full Tech Stack contains exactly 38 approved technical skills', () => {
+test('full Tech Stack contains exactly 39 approved technical skills', () => {
   const actual = skillGroups.flatMap(group => group.skills);
   assert.equal(skillGroups.length, 7);
-  assert.equal(actual.length, 38);
-  assert.equal(skillCount, 38);
-  assert.equal(new Set(actual).size, 38);
+  assert.equal(actual.length, 39);
+  assert.equal(skillCount, 39);
+  assert.equal(new Set(actual).size, 39);
   assert.deepEqual([...actual].sort(), [...approvedSkills].sort());
   assert.equal(actual.some(skill => aiWorkflowTools.includes(skill)), false);
   assert.equal(featuredSkills.every(skill => actual.includes(skill)), true);
 });
 
-test('all 38 skills render a branded SVG icon or a deliberate conceptual monogram', () => {
+test('all 39 skills render a branded SVG icon or a deliberate conceptual monogram', () => {
   const skillsCode = readFileSync(new URL('../src/sections/Skills.jsx', import.meta.url), 'utf8');
   const sprite = readFileSync(new URL('../public/icons/skill-sprite.svg', import.meta.url), 'utf8');
   const brandPairs = [...skillsCode.matchAll(/^\s*'([^']+)': '([^']+)',?\s*$/gm)];
@@ -67,6 +68,13 @@ test('all 38 skills render a branded SVG icon or a deliberate conceptual monogra
     assert.ok(icons.has(skill) || concepts.has(skill), 'Missing icon for ' + skill);
     if (icons.has(skill)) assert.ok(symbols.has(icons.get(skill)), 'Missing SVG symbol for ' + skill);
   }
+});
+
+test('Canva appears exactly once within UI/UX, not as a separate invented skill', () => {
+  const category = skillGroups.find(group => group.title === 'UI/UX & Specialized Development');
+  assert.ok(category);
+  assert.ok(category.skills.includes('Canva'));
+  assert.equal(skillGroups.flatMap(group => group.skills).filter(skill => skill === 'Canva').length, 1);
 });
 
 test('mobile skills are represented without implying Flutter, Dart or Android Studio experience', () => {
