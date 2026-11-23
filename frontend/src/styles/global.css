@@ -333,16 +333,8 @@ body { background: var(--page); color: var(--text); transition: background-color
 .home-socials a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .home-socials svg { width: 13px; height: 13px; }
 .home-section { margin-top: clamp(28px, 4vw, 56px); }
-.highlights-section + .home-section { margin-top: 10px; }
 .home-section.projects-section { margin-top: 22px; }
-.highlights-section { padding-top: 11px; border-top: 1px solid var(--line); }
 .home-section > .eyebrow { margin-bottom: 8px; color: var(--muted); }
-.highlight-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.highlight-grid a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-content: center; gap: 2px 6px; min-height: 62px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
-.highlight-grid a:hover { background: var(--card); }
-.highlight-grid strong { grid-column: 1; font-size: 12px; line-height: 1.3; overflow-wrap: anywhere; }
-.highlight-grid span { grid-column: 1; color: var(--muted); font-size: 10px; line-height: 1.3; }
-.highlight-grid .highlight-arrow { grid-area: 1 / 2 / span 2; align-self: center; font-size: 13px; }
 .portfolio-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
 .portfolio-stats > div { display: flex; flex-direction: row-reverse; align-items: center; justify-content: flex-end; gap: 10px; padding: 10px clamp(9px, 1vw, 15px); min-width: 0; }
 .portfolio-stats > div:first-child { padding-inline-start: 0; }
@@ -357,7 +349,7 @@ body { background: var(--page); color: var(--text); transition: background-color
 .availability-panel h2 { font-size: clamp(24px, 3vw, 32px); letter-spacing: -.04em; }
 .section-row a { display: inline-flex; align-items: center; gap: 5px; min-height: 32px; font-size: 11px; }
 
-.portfolio-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 870px; }
 .project-preview { display: grid; grid-template-rows: auto 1fr; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); box-shadow: 0 2px 8px rgb(0 0 0 / .045); transition: box-shadow .18s, border-color .18s; }
 .project-preview:hover { border-color: var(--accent); box-shadow: var(--shadow); }
 .project-image-link { display: block; min-width: 0; overflow: hidden; border-radius: 11px 11px 0 0; }
@@ -373,6 +365,7 @@ body { background: var(--page); color: var(--text); transition: background-color
 .project-open-link { flex: none; display: grid; place-items: center; width: 36px; height: 36px; margin: -7px -7px -3px 0; border-radius: 7px; color: var(--muted); font-size: 15px; }
 .project-open-link:hover { color: var(--text); background: var(--card); }
 .project-card-description { margin-top: 6px; color: var(--muted); overflow-wrap: anywhere; }
+.home-page .project-card-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .project-card-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; margin-top: auto; padding-top: 8px; }
 .project-tech-list { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; list-style: none; margin: 9px 0 0; padding: 0; }
 .project-tech-list li { border: 1px solid var(--line); border-radius: 5px; padding: 2px 6px; color: var(--muted); font-size: 10px; line-height: 1.5; }
@@ -444,9 +437,7 @@ body { background: var(--page); color: var(--text); transition: background-color
   .navigation.is-open { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
   .navigation a, .theme-toggle, .nav-search { min-height: 44px; }
   #main [id][tabindex="-1"] { scroll-margin-top: 12px; }
-  .home-socials a, .capstone-pill, .highlight-grid a, .section-row a { min-height: 44px; }
   .home-socials a { min-width: 44px; }
-  .highlight-grid a { align-items: center; }
 }
 @media (max-width: 600px) {
   .page-content { padding-block: 28px 40px; }
@@ -465,7 +456,6 @@ body { background: var(--page); color: var(--text); transition: background-color
   .home-introduction > p:not(.eyebrow) { font-size: 15px; }
   .home-meta span + span { padding-inline-start: 0; }
   .home-meta span + span::before { content: none; }
-  .highlight-grid { grid-template-columns: minmax(0, 1fr); }
   .journey-timeline li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .portfolio-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .portfolio-stats > div:nth-child(odd) { border-inline-start: 0; padding-inline-start: 0; }
@@ -660,7 +650,6 @@ html.search-dialog-open { overflow: hidden; }
 .aquabless-module p { font-size: 13px; line-height: 1.7; color: var(--muted); }
 .aquabless-stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 1023px) {
-  .highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) {
   .aquabless-detail-layout { grid-template-columns: minmax(0, 1fr); }
@@ -668,7 +657,6 @@ html.search-dialog-open { overflow: hidden; }
   .aquabless-detail-section { margin-top: 32px; }
 }
 @media (max-width: 600px) {
-  .highlight-grid { grid-template-columns: minmax(0, 1fr); }
   .aquabless-art-name { font-size: clamp(27px, 8vw, 42px); }
   .aquabless-art--compact .aquabless-art-name { font-size: clamp(28px, 8vw, 42px); }
   .aquabless-art-brand p { font-size: 10px; }
@@ -688,10 +676,13 @@ html.search-dialog-open { overflow: hidden; }
   .portfolio-stats dt { font-size: 9px; }
 }
 
-/* The compact layout must never hide project copy or technical skills. */
+/* Compact homepage preview; full project details and categorized technical skills are accessible via links. */
 .stack-preview .skill-tiles { gap: 5px 6px; }
 .stack-preview .skill-tile { min-height: 29px; padding: 3px 7px; font-size: 11px; }
 .stack-preview .skill-icon { flex-basis: 17px; width: 17px; height: 17px; }
+.stack-preview .skill-more-item { display: flex; align-items: stretch; }
+.stack-preview .skill-more-link { display: inline-flex; align-items: center; min-height: 29px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); background: var(--bg); font-size: 11px; font-weight: 650; text-decoration: none; }
+.stack-preview .skill-more-link:hover, .stack-preview .skill-more-link:focus-visible { background: var(--card); border-color: var(--muted); }
 @media (max-width: 660px) {
   .stack-preview .skill-tile { font-size: 12px; }
   .project-card-content { padding: 13px 14px; }
