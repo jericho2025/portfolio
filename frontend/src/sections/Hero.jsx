@@ -72,6 +72,7 @@ export default function Hero() {
         <div className="highlight-grid">
           <Link to="/portfolio/wisdom"><strong>WISDOM</strong><span>Capstone</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
           <Link to="/arcade"><strong>Portfolio &amp; Interactive Arcade</strong><span>Personal project</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
+          <Link to="/portfolio/aquabless"><strong>AquaBless</strong><span>Water ordering system</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
           <Link to="/about#journey"><strong>Pambayang Dalubhasaan ng Marilao</strong><span>Information Technology</span><span className="highlight-arrow" aria-hidden="true">↗</span></Link>
         </div>
       </section>
