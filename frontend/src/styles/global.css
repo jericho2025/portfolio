@@ -741,15 +741,8 @@ html.search-dialog-open { overflow: hidden; }
   .aquabless-process-list { grid-template-columns: 1fr; }
 }
 
-/* Header identity and real AquaBless landing preview. */
-.wordmark { display: flex; align-items: center; gap: 9px; font: 650 13px/1.35 var(--mono); }
-.wordmark-photo { display: block; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; object-fit: cover; object-position: 50% 27%; }
-.wordmark span { display: block; min-width: 0; overflow-wrap: anywhere; }
+/* Genuine AquaBless landing page preview. */
 .aquabless-landing-preview { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--line); border-radius: 10px; }
-@media (max-width: 420px) {
-  .wordmark { font-size: 12px; }
-  .wordmark-photo { width: 31px; height: 31px; flex-basis: 31px; }
-}
 
 /* Project function breakdowns: keep existing screenshot galleries unchanged. */
 .feature-capabilities { margin-top: 18px; }
