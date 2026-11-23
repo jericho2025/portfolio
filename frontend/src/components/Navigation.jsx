@@ -1,62 +1,129 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { platforms } from '../sections/Contact.jsx';
+import DownloadCvLink from './DownloadCvLink.jsx';
 
-const links = [['/', 'Home'], ['/about', 'About Me'], ['/portfolio', 'Portfolio'], ['/services', 'Services'], ['/github', 'GitHub'], ['/arcade', 'Arcade'], ['/contact', 'Contact']];
+const groups = [
+  { label: 'Explore', links: [
+    ['/#featured', 'Featured', 'featured'],
+    ['/github', 'GitHub', 'github'],
+    ['/arcade', 'Arcade', 'arcade'],
+  ] },
+  { label: 'Portfolio', links: [
+    ['/', 'Home', 'home'],
+    ['/portfolio', 'Projects', 'projects'],
+    ['/about', 'Journey', 'journey'],
+    ['/about#skills', 'Stack', 'stack'],
+    ['/services', 'Services', 'services'],
+    ['/#availability', 'Availability', 'contact'],
+  ] },
+];
+
+const email = platforms.find(({ id }) => id === 'email');
+
+const icons = {
+  home: 'm3 10 9-7 9 7v10H3z M9 20v-6h6v6',
+  projects: 'M3 6h18v14H3z M8 6V3h8v3 M3 11h18',
+  journey: 'M5 21V3 M5 7h7l3-3h5v7h-5l-3 3H5',
+  stack: 'm12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5',
+  services: 'm12 3 9 5v8l-9 5-9-5V8z M3 8l9 5 9-5 M12 13v8',
+  featured: 'm12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z',
+  github: 'm8 6-6 6 6 6 M16 6l6 6-6 6 M14 4l-4 16',
+  arcade: 'M8 8h8a4 4 0 0 1 4 3l1 5a2 2 0 0 1-3 2l-3-2H9l-3 2a2 2 0 0 1-3-2l1-5a4 4 0 0 1 4-3z M8 10v5 M5.5 12.5h5 M16 12h.01 M18 14h.01',
+  contact: 'M3 5h18v14H3z m0 1 9 7 9-7',
+  theme: 'M20 15a8 8 0 0 1-11-11 8.5 8.5 0 1 0 11 11z',
+  menu: 'M3 6h18 M3 12h18 M3 18h18',
+  close: 'm5 5 14 14 M19 5 5 19',
+};
+
+function NavIcon({ name }) {
+  return <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={icons[name]} /></svg>;
+}
 
 export default function Navigation({ theme, toggleTheme }) {
-  const [open, setOpen] = useState(false);
+  const [openOn, setOpenOn] = useState(null);
   const toggle = useRef(null);
-  const navigation = useRef(null);
-  const { pathname } = useLocation();
-  useEffect(() => { setOpen(false); }, [pathname]);
-  useEffect(() => {
+  const header = useRef(null);
+  const { pathname, hash, key } = useLocation();
+  const open = openOn === key;
+  const normalizedPath = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+
+  useLayoutEffect(() => {
     if (!open) return;
-    // Wait for the visibility transition before moving keyboard focus.
-    const timer = setTimeout(() => navigation.current?.querySelector('a')?.focus(), 180);
-    return () => clearTimeout(timer);
-  }, [open]);
-  useEffect(() => {
-    if (!open) return;
-    const body = document.body, root = document.documentElement;
-    const previous = { overflow: body.style.overflow, padding: body.style.paddingRight, rootOverflow: root.style.overflow };
-    const scrollbar = window.innerWidth - root.clientWidth;
-    if (scrollbar) body.style.paddingRight = `${scrollbar}px`;
-    body.style.overflow = 'hidden'; root.style.overflow = 'hidden';
-    const background = [...document.querySelectorAll('#main, .footer')].map(element => ({ element, inert: element.inert }));
-    background.forEach(({ element }) => { element.inert = true; });
-    return () => {
-      body.style.overflow = previous.overflow; body.style.paddingRight = previous.padding; root.style.overflow = previous.rootOverflow;
-      background.forEach(({ element, inert }) => { element.inert = inert; });
-    };
-  }, [open]);
-  useEffect(() => {
-    function escape(event) {
-      if (event.key === 'Escape' && open) { setOpen(false); toggle.current?.focus(); }
-      if (event.key === 'Tab' && open) {
-        const controls = [...navigation.current.closest('header').querySelectorAll('a, button')].filter(element => element.getClientRects().length);
-        const first = controls[0], last = controls.at(-1);
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+
+    const desktop = matchMedia('(min-width: 901px)');
+    if (desktop.matches) {
+      setOpenOn(null);
+      return;
+    }
+
+    const root = document.documentElement;
+    const controls = () => [...header.current.querySelectorAll('a[href], button')];
+    const background = [...document.querySelectorAll('.skip-link, #main, .footer')];
+    const priorInert = background.map(element => element.inert);
+    background.forEach(element => { element.inert = true; });
+    root.classList.add('mobile-menu-open');
+    header.current.querySelector('nav a')?.focus({ preventScroll: true });
+
+    function handleKey(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpenOn(null);
+        toggle.current?.focus();
+      }
+      if (event.key !== 'Tab') return;
+      const items = controls();
+      const boundary = event.shiftKey ? items[0] : items.at(-1);
+      if (document.activeElement === boundary || !items.includes(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? items.at(-1) : items[0]).focus();
       }
     }
-    function outside(event) { if (open && !navigation.current.closest('header').contains(event.target)) { setOpen(false); toggle.current?.focus(); } }
-    const media = matchMedia('(min-width: 901px)');
-    const close = () => setOpen(false);
-    document.addEventListener('keydown', escape);
-    document.addEventListener('pointerdown', outside);
-    media.addEventListener('change', close);
-    return () => { document.removeEventListener('keydown', escape); document.removeEventListener('pointerdown', outside); media.removeEventListener('change', close); };
+
+    function handleResize(event) {
+      if (event.matches) setOpenOn(null);
+    }
+
+    document.addEventListener('keydown', handleKey);
+    desktop.addEventListener('change', handleResize);
+    return () => {
+      root.classList.remove('mobile-menu-open');
+      background.forEach((element, index) => { element.inert = priorInert[index]; });
+      document.removeEventListener('keydown', handleKey);
+      desktop.removeEventListener('change', handleResize);
+    };
   }, [open]);
+
+  function dismiss() {
+    setOpenOn(null);
+    toggle.current?.focus();
+  }
+
+  function renderLink([path, label, icon]) {
+    const [destination, fragment] = path.split('#');
+    const selected = fragment
+      ? normalizedPath === destination && hash === '#' + fragment
+      : (normalizedPath === destination && !hash) || (destination === '/portfolio' && normalizedPath.startsWith('/portfolio/'));
+    return <Link key={path} className={selected ? 'active' : undefined} aria-current={selected ? (fragment ? 'location' : 'page') : undefined} to={path} onClick={() => setOpenOn(null)}><NavIcon name={icon} />{label}</Link>;
+  }
+
+  const themeLabel = theme === 'dark' ? 'Light mode' : 'Dark mode';
   return (
-    <header className="site-header"><div className="nav-shell">
-      <Link className="wordmark" to="/" aria-label="Jericho Flores, home">JF.</Link>
-      <nav ref={navigation} id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
-        {links.map(([path, label]) => <NavLink key={path} to={path} end={path === '/'} onClick={() => setOpen(false)}>{label}</NavLink>)}
-      </nav>
-      <div className="nav-actions">
-        <button className="theme-toggle" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}><span aria-hidden="true">◐</span></button>
-        <button ref={toggle} className="menu-toggle" aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-controls="main-navigation" aria-expanded={open} onClick={() => setOpen(!open)}><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" aria-hidden="true">{open ? <path d="m4 4 10 10M14 4 4 14" /> : <path d="M2 4h14M2 9h14M2 14h14" />}</svg>{open ? 'Close' : 'Menu'}</button>
+    <header className="site-header" ref={header}>
+      <div className="nav-shell" role={open ? "dialog" : undefined} aria-modal={open || undefined} aria-label={open ? "Site menu" : undefined}>
+        <Link className="wordmark" to="/" onClick={() => setOpenOn(null)}>Jericho Flores</Link>
+        <button ref={toggle} className="menu-toggle" aria-controls="main-navigation" aria-expanded={open} type="button" onClick={() => open ? dismiss() : setOpenOn(key)}><NavIcon name={open ? 'close' : 'menu'} />{open ? 'Close' : 'Menu'}</button>
+        {open && <div className="menu-backdrop" aria-hidden="true" onClick={dismiss} />}
+        <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
+          {groups.map(({ label, links }) => <div className="nav-group" key={label}><p>{label}</p>{links.map(renderLink)}</div>)}
+          <div className="nav-actions">
+            <button className="theme-toggle" type="button" onClick={toggleTheme}><NavIcon name="theme" />{themeLabel}</button>
+            <DownloadCvLink onClick={open ? dismiss : undefined} />
+            <NavLink to="/contact" onClick={() => setOpenOn(null)}><NavIcon name="contact" />Get in touch</NavLink>
+            <a className="sidebar-email" href={email.href}>{email.value}</a>
+          </div>
+        </nav>
       </div>
-    </div></header>
+    </header>
   );
 }

@@ -3,11 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jericho M. Flores — Full-Stack Web Developer based in Marilao, Bulacan, Philippines. Explore technical skills, collaborative project work, and public GitHub repositories." />
+    <meta name="description" content="Jericho M. Flores is an aspiring full-stack web developer in Marilao, Bulacan, Philippines. Explore his projects, technical skills, and interactive Arcade." />
+    <meta name="robots" content="index, follow" />
     <meta name="color-scheme" content="light dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jericho M. Flores" />
+    <meta property="og:title" content="Jericho M. Flores | Aspiring Full-Stack Web Developer" />
+    <meta property="og:description" content="Jericho M. Flores is an aspiring full-stack web developer in Marilao, Bulacan, Philippines. Explore his projects, technical skills, and interactive Arcade." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Jericho M. Flores | Full-Stack Web Developer</title>
+    <link id="portrait-preload" rel="preload" as="image" href="/src/assets/jericho-profile.webp" media="not all" />
+    <title>Jericho M. Flores | Aspiring Full-Stack Web Developer</title>
     <script>
+      if (/^\/(?:about\/?)?$/i.test(location.pathname)) {
+        document.getElementById('portrait-preload').media = 'all';
+      }
       try {
         const saved = localStorage.getItem('portfolio-theme');
         document.documentElement.dataset.theme = saved === 'light' || saved === 'dark' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');

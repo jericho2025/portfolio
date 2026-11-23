@@ -29,7 +29,7 @@ function MineRound({ difficulty, onFinish, restart }) {
   return <>
     <div className="game-toolbar"><span>Mines remaining: {mines - flags}</span><span>Time: {Math.floor(seconds)}s</span><button aria-pressed={flagMode} onClick={() => setFlagMode(!flagMode)}>Flag mode {flagMode ? 'on' : 'off'}</button><button onClick={restart}>Restart</button></div>
     <p className="game-status" role="status">{status === 'lost' ? 'Game Over — mine revealed.' : status === 'won' ? 'You cleared the board!' : 'Reveal every safe cell. First reveal is safe.'}</p>
-    <div className="mine-scroll" tabIndex="0" aria-label="Minesweeper board, scroll for larger difficulties"><div className="mine-board" style={{ gridTemplateColumns: `repeat(${cols}, var(--mine-cell, 30px))` }}>
+    <div className="mine-scroll" role="region" tabIndex="0" aria-label="Minesweeper board, scroll for larger difficulties"><div className="mine-board" style={{ gridTemplateColumns: `repeat(${cols}, var(--mine-cell, 30px))` }}>
       {cells.map((c, i) => <button key={i} className={`mine-cell ${c.open ? 'revealed' : c.flag ? 'flagged' : ''}`} aria-label={`Row ${Math.floor(i / cols) + 1}, column ${i % cols + 1}: ${c.flag ? 'flagged' : c.open ? c.mine ? 'mine' : c.count + ' adjacent mines' : 'hidden'}`} disabled={status === 'lost' || status === 'won'} onClick={() => reveal(i)} onContextMenu={e => { e.preventDefault(); flag(i); }}>{c.flag ? '⚑' : (c.open || status === 'lost') && c.mine ? '✹' : c.open ? c.count || '' : ''}</button>)}
     </div></div>
     <details className="game-instructions"><summary>How to Play</summary><p>Reveal every safe cell. Right-click to flag, or enable Flag mode on touch screens. Your first reveal is safe. Large boards scroll horizontally.</p></details>

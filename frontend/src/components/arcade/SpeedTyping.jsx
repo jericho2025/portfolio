@@ -45,9 +45,10 @@ function TypingRound({ duration, best, onFinish, restart }) {
   return <>
     <div className="game-toolbar"><span>Time: {Math.max(0, Math.ceil(duration - elapsed))}s</span><span>WPM: {metrics.wpm}</span><span>Accuracy: {metrics.accuracy}%</span><span>Best: {best ?? '—'} WPM</span><button onClick={restart}>Restart / New Text</button></div>
     <p className="typing-passage" aria-hidden="true">{[...passage].map((c, i) => <span key={i} className={i < typed.length ? typed[i] === c ? 'typed-correct' : 'typed-incorrect' : ''}>{c}</span>)}</p>
-    <label className="typing-label">Type this passage<textarea ref={input} value={typed} onChange={e => { update(e.target.value); rememberSelection(); }} onSelect={rememberSelection} disabled={done} maxLength={passage.length} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onKeyDown={e => setPressed(e.key === ' ' ? 'space' : e.key.toLowerCase())} onKeyUp={() => setPressed('')} onBlur={() => setPressed('')} onPaste={e => e.preventDefault()} aria-describedby="typing-rule" /></label>
+    <p id="typing-passage-text" className="sr-only">{passage}</p>
+    <label className="typing-label">Type this passage<textarea ref={input} value={typed} onChange={e => { update(e.target.value); rememberSelection(); }} onSelect={rememberSelection} disabled={done} maxLength={passage.length} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onKeyDown={e => setPressed(e.key === ' ' ? 'space' : e.key.toLowerCase())} onKeyUp={() => setPressed('')} onBlur={() => setPressed('')} onPaste={e => e.preventDefault()} aria-describedby="typing-rule typing-passage-text" /></label>
     <TypingKeyboard pressed={done ? '' : pressed} shift={shift} onShift={() => setShift(s => !s)} onKey={virtualKey} disabled={done} />
-    <p className="sr-only">{passage}</p><p role="status" className="game-status">{done ? `Finished: ${metrics.wpm} WPM, ${metrics.accuracy}% accuracy.` : 'The timer starts with your first character.'}</p>
+    <p role="status" className="game-status">{done ? `Finished: ${metrics.wpm} WPM, ${metrics.accuracy}% accuracy.` : 'The timer starts with your first character.'}</p>
     <p id="typing-rule" className="game-help">Type above or tap the keys. Shift changes the next character.</p>
   </>;
 }
