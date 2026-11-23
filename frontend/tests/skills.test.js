@@ -109,7 +109,7 @@ test('AquaBless is discoverable as a deployed case study without exposing its pr
   assert.match(projects, /aquabless-web-production\.up\.railway\.app/);
   assert.match(app, /Route path="\/portfolio\/aquabless"/);
   assert.match(app, /'\/portfolio\/aquabless':/);
-  assert.match(hero, /to="\/portfolio\/aquabless"/);
+  assert.match(hero, /<ProjectShowcase \/>/);
   assert.match(detail, /Customer/);
   assert.match(detail, /Operator/);
   assert.match(detail, /Rider/);
