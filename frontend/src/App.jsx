@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation.jsx';
+import PortfolioSearch from './components/PortfolioSearch.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './sections/Hero.jsx';
 import Projects from './sections/Projects.jsx';
@@ -54,10 +55,11 @@ function RouteDetails() {
 
 function PortfolioApp() {
   const [theme, toggleTheme] = useTheme();
+  const [searchOpen, setSearchOpen] = useState(false);
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">Skip to content</a>
-      <Navigation theme={theme} toggleTheme={toggleTheme} />
+      <Navigation theme={theme} toggleTheme={toggleTheme} searchOpen={searchOpen} openSearch={() => setSearchOpen(true)} />
       <main id="main" tabIndex="-1">
         <Suspense fallback={<p className="page-content" role="status">Loading page…</p>}>
           <Routes>
@@ -75,6 +77,7 @@ function PortfolioApp() {
         </Suspense>
       </main>
       <Footer />
+      <PortfolioSearch open={searchOpen} setOpen={setSearchOpen} />
     </div>
   );
 }

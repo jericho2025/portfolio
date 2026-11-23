@@ -1,4 +1,4 @@
-import { skillGroups } from '../data/skills.js';
+import { skillGroupId, skillGroups } from '../data/skills.js';
 
 export function SkillList({ skills, label }) {
   return (
@@ -10,7 +10,7 @@ export function SkillList({ skills, label }) {
 
 function SkillCategory({ title, skills }) {
   return (
-    <div className="skill-group">
+    <div className="skill-group" id={skillGroupId(title)} tabIndex={-1}>
       <h3>{title}</h3>
       <SkillList skills={skills} />
     </div>
