@@ -437,6 +437,7 @@ body { background: var(--page); color: var(--text); transition: background-color
   .navigation.is-open { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
   .navigation a, .theme-toggle, .nav-search { min-height: 44px; }
   #main [id][tabindex="-1"] { scroll-margin-top: 12px; }
+  .home-socials a, .capstone-pill, .section-row a { min-height: 44px; }
   .home-socials a { min-width: 44px; }
 }
 @media (max-width: 600px) {
